@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using GCCommerce.Data;
 using GCCommerce.Models;
 using GCCommerce.Services;
+using GCCommerce.Entities;
 
 namespace GCCommerce
 {
@@ -28,6 +29,10 @@ namespace GCCommerce
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<GCCommerceContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("OurDb")));
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -61,7 +66,7 @@ namespace GCCommerce
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Administrator}/{action=AddUpdateNews}/{id?}");
             });
         }
     }

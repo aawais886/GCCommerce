@@ -1,0 +1,71 @@
+﻿@model IEnumerable<GCCommerce.Entities.News>
+
+@{
+    ViewData["Title"] = "NewsList";
+}
+
+<h2>NewsList</h2>
+
+<p>
+    <a asp-action="AddUpdateNews">Create New</a>
+</p>
+<table class="table" id="table" name="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NewsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewsValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateUpdated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @if (item.DateUpdated != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DateUpdated)
+
+                    }
+                    else
+                    {
+                        <strong>Null</strong>
+
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateNews", new { id = item.NewsId }) |
+                    @Html.ActionLink("Details", "NewsDetail", new { id = item.NewsId }) |
+                    @Html.ActionLink("Delete", "NewsDelete", new { id = item.NewsId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}
