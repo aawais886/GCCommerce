@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GCCommerce.Entities.Gallery>
+
+@{
+    ViewData["Title"] = "GalleryList";
+}
+
+<h2>GalleryList</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" id="table" name="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GalleryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GalleryImageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GalleryImageDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.DateUpdated)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GalleryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GalleryImageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GalleryImageDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateUpdated)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }) |
+                    @Html.ActionLink("Details", "GalleryDetail", new {GalleryID =item.GalleryId}) |
+                    @Html.ActionLink("Delete", "GalleryDelete", new { GalleryID=item.GalleryId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}

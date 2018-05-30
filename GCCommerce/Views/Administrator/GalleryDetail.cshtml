@@ -1,0 +1,48 @@
+﻿@model GCCommerce.Entities.Gallery
+
+@{
+    ViewData["Title"] = "GalleryDetail";
+}
+
+<h2>GalleryDetail</h2>
+
+<div>
+    <h4>Gallery</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GalleryId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GalleryId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GalleryImageName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GalleryImageName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GalleryImageDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GalleryImageDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateUpdated)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "UpdateGallery", new { id = Model.GalleryId }) |
+    <a asp-action="GalleryList">Back to List</a>
+</div>
