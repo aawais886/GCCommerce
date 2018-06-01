@@ -66,7 +66,7 @@ namespace GCCommerce
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Administrator}/{action=AddUpdateGllery}/{id?}");
+                    template: "{controller=Administrator}/{action=AddUpdateTeacher}/{id?}");
             });
         }
     }

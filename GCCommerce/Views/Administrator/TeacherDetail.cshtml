@@ -1,0 +1,90 @@
+﻿@model GCCommerce.Entities.Teacher
+
+@{
+    ViewData["Title"] = "TeacherDetail";
+}
+
+<h2>TeacherDetail</h2>
+
+<div>
+    <h4>Teacher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeacherId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeacherId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Grade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Grade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Qualification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Qualification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HiredDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HiredDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TransferDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TransferDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RetirementDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RetirementDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateUpdated)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "UpdateTeacher", new { id = Model.TeacherId }) |
+    <a asp-action="TeacherList">Back to List</a>
+</div>

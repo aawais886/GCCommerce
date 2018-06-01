@@ -6,16 +6,21 @@ using GCCommerce.Entities;
 using GCCommerce.Helpers;
 using GCCommerce.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace GCCommerce.Controllers
 {
     public class AdministratorController : Controller
     {
         GCCommerceContext OurdbContext = null;
+        IHostingEnvironment env = null;
 
-        public AdministratorController(GCCommerceContext _OurdbContext)
+        public AdministratorController(GCCommerceContext _OurdbContext, IHostingEnvironment _env)
         {
             OurdbContext = _OurdbContext;
+            env = _env;
 
         }
         public IActionResult Index()
@@ -244,7 +249,6 @@ namespace GCCommerce.Controllers
         [HttpPost]
         public IActionResult AddUpdateGllery(ModelGallery MG)
         {
-
             if (!ModelState.IsValid)
             {
                 TempData["Action"] = Constants.FAILED;
@@ -254,7 +258,7 @@ namespace GCCommerce.Controllers
             {
                 if (MG.GalleryId > 0)
                 {
-                    MG.DateUpdated = DateTime.Now.Date;
+                    MG.DateUpdated = DateTime.Now;
                     OurdbContext.Gallery.Update(CopyMGToG(MG));
                     OurdbContext.SaveChanges();
                 }
@@ -339,10 +343,67 @@ namespace GCCommerce.Controllers
             return View("AddUpdateTeacher", CopyTToMT(T));
         }
         [HttpPost]
-        public IActionResult AddUpdateTeacher(ModelTeacher MT)
+        public IActionResult AddUpdateTeacher(ModelTeacher MT, ICollection<IFormFile> images)
         {
+            if(!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MT);
+            }
+            string wwwrootPath = env.WebRootPath;
+            string ImageFolderPath = wwwrootPath + "/images/";
+
+            foreach (var file in images)
+            {
+                string Name = file.Name;
+
+                string FileName = file.FileName;
+                long FileLength = file.Length;
+               
+                string FileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileName);
+                Random r = new Random();
+
+                FileNameWithoutExtension = DateTime.Now.ToString("ddMMyyyyhhmm") + r.Next(1, 1000).ToString();
+                string Extension = Path.GetExtension(FileName);
+
+                FileStream fs = new FileStream(ImageFolderPath + FileNameWithoutExtension + Extension, FileMode.CreateNew);
+                file.CopyTo(fs);
+                fs.Close();
+                fs.Dispose();
+
+               MT.Image = ImageFolderPath + FileNameWithoutExtension + Extension;
+            }
+            try
+            {
+                if (MT.TeacherId > 0)
+                {
+                    MT.DateUpdated = DateTime.Now;
+                    OurdbContext.Teacher.Update(CopyMTToT(MT));
+                    OurdbContext.SaveChanges();
+                }
+                else
+                {
+                    OurdbContext.Teacher.Add(CopyMTToT(MT));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch(Exception)
+            {
+                TempData["action"] = Constants.FAILED;
+            }
             return View();
         }
+
+        public IActionResult TeacherList()
+        {
+            return View(OurdbContext.Teacher.ToList());
+        }
+        public IActionResult TeacherDetail(int TeacherID)
+        {
+            Teacher obj =OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
+            return View(obj);
+        }
+
         private Teacher CopyMTToT(ModelTeacher MT)
         {
             Teacher T = new Teacher
@@ -363,7 +424,6 @@ namespace GCCommerce.Controllers
             };
             return T;
         }
-
         private ModelTeacher CopyTToMT(Teacher T)
         {
             ModelTeacher MT = new ModelTeacher
