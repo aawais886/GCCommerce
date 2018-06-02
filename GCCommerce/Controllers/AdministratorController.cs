@@ -131,7 +131,7 @@ namespace GCCommerce.Controllers
         [HttpGet]
         public IActionResult AddUpdateEvent()
         {
-            Event E = new Event();
+            ModelEvent E = new ModelEvent();
             E.DateCreated = DateTime.Now;
             return View(E);
         }
@@ -228,7 +228,7 @@ namespace GCCommerce.Controllers
         [HttpGet]
         public IActionResult AddUpdateGllery()
         {
-            Gallery G = new Gallery();
+            ModelGallery G = new ModelGallery();
             G.DateCreated = DateTime.Now;
             return View(G);
         }
@@ -324,7 +324,7 @@ namespace GCCommerce.Controllers
         [HttpGet]
         public IActionResult AddUpdateTeacher()
         {
-            Teacher T = new Teacher();
+            ModelTeacher T = new ModelTeacher();
             T.DateCreated = DateTime.Now;
             return View(T);
         }
@@ -403,6 +403,13 @@ namespace GCCommerce.Controllers
             Teacher obj =OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
             return View(obj);
         }
+        public IActionResult TeacherDelete(int TeacherID)
+        {
+           Teacher obj = OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
+            OurdbContext.Teacher.Remove(obj);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.TeacherList));
+        }
 
         private Teacher CopyMTToT(ModelTeacher MT)
         {
@@ -445,5 +452,160 @@ namespace GCCommerce.Controllers
             return MT;
         }
         #endregion
+
+        #region Shift
+        /******************************************************* Shift SECTION ********************************************************/
+        [HttpGet]
+        public IActionResult AddUpdateShift()
+        {
+            ModelShift S = new ModelShift();
+            S.DateCreated = DateTime.Now;
+            return View(S);
+        }
+        [HttpGet]
+        public IActionResult UpdateShift(int id)
+        {
+            if (id < 1)
+            {
+                return NotFound();
+            }
+            Shift S = OurdbContext.Shift.Find(id);
+            if (S.ShiftId < 1)
+            {
+                return NotFound();
+            }
+            return View("AddUpdateShift", CopyShiftToMShift(S));
+        }
+        [HttpPost]
+        public IActionResult AddUpdateShift(ModelShift MSobj)
+        {
+            if(!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MSobj);
+            }
+
+            try
+            {
+                if(MSobj.ShiftId > 0)
+                {
+                    MSobj.DateUpdated = DateTime.Now;
+                    OurdbContext.Shift.Update(CopyMShiftToShift(MSobj));
+                    OurdbContext.SaveChanges();
+                }
+                else
+                {
+                    OurdbContext.Shift.Add(CopyMShiftToShift(MSobj));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch(Exception)
+            {
+                TempData["Action"] = Constants.FAILED;
+            }
+            return RedirectToAction(nameof(AdministratorController.ShiftList));
+        }
+        public IActionResult ShiftList()
+        {
+            return View(OurdbContext.Shift.ToList());
+        }
+
+        public IActionResult ShiftDetail(int ShiftID)
+        {
+            Shift obj = OurdbContext.Shift.Where(abc => abc.ShiftId == ShiftID).FirstOrDefault();
+            return View(obj);
+        }
+
+        public IActionResult ShiftDelete(int ShiftID)
+        {
+            Shift obj = OurdbContext.Shift.Where(abc => abc.ShiftId==ShiftID).FirstOrDefault();
+            OurdbContext.Shift.Remove(obj);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.ShiftList));
+        }
+
+        private Shift CopyMShiftToShift(ModelShift MS)
+        {
+            Shift S = new Shift
+            {
+                ShiftId = MS.ShiftId,
+                Shift1=MS.Shift1,
+                DateCreated = MS.DateCreated,
+                DateUpdated = MS.DateUpdated,
+
+            };
+            return S;
+        }
+
+        private ModelShift CopyShiftToMShift(Shift S)
+        {
+            ModelShift MS = new ModelShift
+            {
+                ShiftId = S.ShiftId,
+                Shift1 = S.Shift1,
+                DateCreated = S.DateCreated,
+                DateUpdated = S.DateUpdated,
+            };
+            return MS;
+        }
+        #endregion
+
+        #region MERITLIST
+        ///******************************************************* MERITLIST SECTION ********************************************************/
+        //[HttpGet]
+        //public IActionResult AddUpdateMeritList()
+        //{
+        //    MeritList ML = new MeritList();
+        //    ML.DateCreated = DateTime.Now;
+        //    return View(ML);
+        //}
+        //[HttpGet]
+        //public IActionResult UpdateMeritList(int id)
+        //{
+        //    if (id < 1)
+        //    {
+        //        return NotFound();
+        //    }
+        //    MeritList ML = OurdbContext.MeritList.Find(id);
+        //    if(ML.MeritListId <1 )
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View("AddUpdateMeritList", CopyMMLToML(ML));
+        //}
+        //[HttpPost]
+        //public IActionResult AddUpdateMeritList(ModelMeritList Ml)
+        //{
+        //    return View();
+        //}
+        //private MeritList CopyMMLToML(ModelMeritList MML)
+        //{
+        //    MeritList ML = new MeritList
+        //    {
+        //        MeritListId = MML.MeritListId,
+        //        FkProgram = MML.FkProgram,
+        //        Shift = MML.Shift,
+        //        MeritListValue= MML.MeritListValue,
+        //        DateCreated = MML.DateCreated,
+        //        DateUpdated = MML.DateUpdated,
+
+        //    };
+        //    return ML;
+        //}
+        //private MeritList CopyMLToMML(MeritList ML)
+        //{
+        //    ModelMeritList MML = new ModelMeritList
+        //    {
+        //        MeritListId = ML.MeritListId,
+        //        FkProgram = ML.FkProgram,
+        //        Shift = ML.Shift,
+        //        MeritListValue = ML.MeritListValue,
+        //        DateCreated = ML.DateCreated,
+        //        DateUpdated = ML.DateUpdated,
+        //    };
+        //    return ML;
+        //}
+        #endregion
     }
+
 }
