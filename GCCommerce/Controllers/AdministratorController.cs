@@ -550,6 +550,56 @@ namespace GCCommerce.Controllers
         }
         #endregion
 
+        #region Program
+        /******************************************************* PROGRAM SECTION ********************************************************/
+        [HttpGet]
+        public IActionResult AddUpdateProgram()
+        {
+            ModelProgram MP = new ModelProgram();
+            MP.DateCreated = DateTime.Now;
+            return View(MP);
+        }
+        [HttpGet]
+        public IActionResult UpdateProgram(int id)
+        {
+            if (id < 1)
+            {
+                return NotFound();
+            }
+
+            Program P = OurdbContext.Program.Find(id);
+            if (P.ProgramId < 1)
+            {
+                return NotFound();
+            }
+            return View("AddUpdateProgram"); /*CopyMPToP(P)*/
+        }
+        [HttpPost]
+        public IActionResult AddUpdateProgram(ModelProgram MP)
+        {
+            return View();
+        }
+     
+   private Program CopyMPToP(ModelProgram MP)
+        {
+            Program P = new Program
+            {
+              
+
+            };
+            return P;
+        }
+        //private ModelProgram CopyPToMP(Program P)
+        //{
+        //    ModelProgram MP = new ModelProgram
+        //    {
+               
+        //    };
+        //    return ML;
+        //}
+        #endregion
+
+
         #region MERITLIST
         ///******************************************************* MERITLIST SECTION ********************************************************/
         //[HttpGet]
