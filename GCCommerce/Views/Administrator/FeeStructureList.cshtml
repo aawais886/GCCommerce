@@ -1,0 +1,87 @@
+﻿@model IEnumerable<GCCommerce.Entities.FeeStructure>
+
+@{
+    ViewData["Title"] = "FeeStructureList";
+}
+
+<h2>FeeStructureList</h2>
+
+<p>
+    <a asp-action="AddUpdateFeeStructure">Create New</a>
+</p>
+<table class="table" id="table" name="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkProgramId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th> 
+                @Html.DisplayNameFor(model => model.DateUpdated)               
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FkProgramId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shift)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @if (item.DateUpdated != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                    }
+                    else
+                    {
+                        <strong>Null</strong>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateFeeStructure", new {  id=item.Id }) |
+                    @Html.ActionLink("Details", "FeeStructureDetail", new { FeeStructureID = item.Id }) |
+                    @Html.ActionLink("Delete", "FeeStructureDelete", new { FeeStructureID = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}

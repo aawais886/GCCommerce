@@ -1,0 +1,82 @@
+﻿@model IEnumerable<GCCommerce.Entities.Admission>
+
+@{
+    ViewData["Title"] = "AdmissionList";
+}
+
+<h2>AdmissionList</h2>
+
+<p>
+    <a asp-action="AddUpdateAdmission">Create New</a>
+</p>
+<table class="table" id="table" name="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkProgramId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionEligibilityCriteria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionDocument)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateUpdated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FkProgramId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionEligibilityCriteria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionDocument)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @if (item.DateUpdated != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                    }
+                    else
+                    {
+                        <strong>Null</strong>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissionId }) |
+                    @Html.ActionLink("Details", "AdmissionDetail", new { AdmissionID = item.AdmissionId }) |
+                    @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissionId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}

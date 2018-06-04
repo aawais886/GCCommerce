@@ -17,14 +17,18 @@ namespace GCCommerce.Entities
         public virtual DbSet<Shift> Shift { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public GCCommerceContext(DbContextOptions<GCCommerceContext> abc):base(abc)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Server=DESKTOP-R51537J\AWAIS;Database=GCCommerce;Trusted_Connection=True;");
-            }
+
         }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer(@"Server=DESKTOP-R51537J\AWAIS;Database=GCCommerce;Trusted_Connection=True;");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

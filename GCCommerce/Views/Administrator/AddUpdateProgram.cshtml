@@ -1,0 +1,62 @@
+﻿@model GCCommerce.Models.ModelProgram
+
+@{
+    ViewData["Title"] = "AddUpdateProgram";
+}
+
+<h2>AddUpdateProgram</h2>
+
+<h4>ModelProgram</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddUpdateProgram">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="ProgramId" class="control-label"></label>
+                <input asp-for="ProgramId" class="form-control" />
+                <span asp-validation-for="ProgramId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FkShiftId" class="control-label"></label>
+                <input asp-for="FkShiftId" class="form-control" />
+                <span asp-validation-for="FkShiftId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProgramTitle" class="control-label"></label>
+                <input asp-for="ProgramTitle" class="form-control" />
+                <span asp-validation-for="ProgramTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="DateUpdated" class="control-label"></label>
+                <input asp-for="DateUpdated" class="form-control" />
+                <span asp-validation-for="DateUpdated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @{
+                    if (Model.ProgramId < 1)
+                    {
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Update" class="btn btn-default" />
+                    }
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ProgramList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

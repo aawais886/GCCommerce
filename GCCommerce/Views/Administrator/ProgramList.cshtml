@@ -1,0 +1,75 @@
+﻿@model IEnumerable<GCCommerce.Entities.Program>
+
+@{
+    ViewData["Title"] = "ProgramList";
+}
+
+<h2>ProgramList</h2>
+
+<p>
+    <a asp-action="AddUpdateProgram">Create New</a>
+</p>
+<table class="table" id="table" name="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FkShiftId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateUpdated)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkShiftId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @if (item.DateUpdated != null)
+                {
+                    @Html.DisplayFor(modelItem => item.DateUpdated)
+
+                }
+                else
+                {
+                    <strong>Null</strong>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateProgram", new {  id=item.ProgramId }) |
+                @Html.ActionLink("Details", "ProgramDetail", new { ProgramID = item.ProgramId }) |
+                @Html.ActionLink("Delete", "ProgramDelete", new { ProgramID = item.ProgramId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+        });
+    </script>
+}

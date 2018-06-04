@@ -1,0 +1,48 @@
+﻿@model GCCommerce.Entities.Program
+
+@{
+    ViewData["Title"] = "ProgramDetail";
+}
+
+<h2>ProgramDetail</h2>
+
+<div>
+    <h4>Program</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProgramId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FkShiftId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FkShiftId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProgramTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateUpdated)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "UpdateProgram", new { id = Model.ProgramId}) |
+    <a asp-action="ProgramList">Back to List</a>
+</div>

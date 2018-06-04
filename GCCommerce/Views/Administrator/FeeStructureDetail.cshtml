@@ -1,0 +1,60 @@
+﻿@model GCCommerce.Entities.FeeStructure
+
+@{
+    ViewData["Title"] = "FeeStructureDetail";
+}
+
+<h2>FeeStructureDetail</h2>
+
+<div>
+    <h4>FeeStructure</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FkProgramId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FkProgramId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Shift)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateUpdated)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="FeeStructureList">Back to List</a>
+</div>

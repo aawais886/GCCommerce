@@ -64,7 +64,7 @@ namespace GCCommerce.Controllers
             {
                 if (MN.NewsId > 0)
                 {
-                    MN.DateUpdated = DateTime.Now.Date;
+                    MN.DateUpdated = DateTime.Now;
                     OurdbContext.News.Update(CopyMNToN(MN));
                     OurdbContext.SaveChanges();
                 }
@@ -567,45 +567,93 @@ namespace GCCommerce.Controllers
                 return NotFound();
             }
 
-            Program P = OurdbContext.Program.Find(id);
+            Entities.Program P = OurdbContext.Program.Find(id);
             if (P.ProgramId < 1)
             {
                 return NotFound();
             }
-            return View("AddUpdateProgram"); /*CopyMPToP(P)*/
+            return View("AddUpdateProgram", CopyPToMP(P));
         }
         [HttpPost]
         public IActionResult AddUpdateProgram(ModelProgram MP)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MP);
+            }
+
+            try
+            {
+                if(MP.ProgramId > 0)
+                {
+                    MP.DateUpdated = DateTime.Now;
+                    OurdbContext.Program.Update(CopyMPToP(MP));
+                    OurdbContext.SaveChanges();                    
+                }
+                else
+                {
+                    OurdbContext.Program.Add(CopyMPToP(MP));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                TempData["Action"] = Constants.FAILED;
+            }
+
+            return RedirectToAction(nameof(AdministratorController.ProgramList));
         }
      
-   private Program CopyMPToP(ModelProgram MP)
+        public IActionResult ProgramList()
         {
-            Program P = new Program
+            return View(OurdbContext.Program.ToList());
+        }
+        public IActionResult ProgramDetail(int ProgramID)
+        {
+           Entities.Program P = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
+            return View(P);
+        }
+        public IActionResult ProgramDelete(int ProgramID)
+        {
+            Entities.Program obj = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
+            OurdbContext.Program.Remove(obj);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.ProgramList));
+        }
+        private Entities.Program CopyMPToP(ModelProgram MP)
+        {
+            Entities.Program P = new Entities.Program
             {
-              
-
+              ProgramId=MP.ProgramId,
+              FkShiftId=MP.FkShiftId,
+              ProgramTitle=MP.ProgramTitle,
+              DateCreated=MP.DateCreated,
+              DateUpdated=MP.DateUpdated,
             };
             return P;
         }
-        //private ModelProgram CopyPToMP(Program P)
-        //{
-        //    ModelProgram MP = new ModelProgram
-        //    {
-               
-        //    };
-        //    return ML;
-        //}
+        private ModelProgram CopyPToMP(Entities.Program P)
+        {
+            ModelProgram MP = new ModelProgram
+            {
+
+                ProgramId = P.ProgramId,
+                FkShiftId = P.FkShiftId,
+                ProgramTitle = P.ProgramTitle,
+                DateCreated = P.DateCreated,
+                DateUpdated = P.DateUpdated,
+            };
+            return MP;
+        }
         #endregion
 
-
         #region MERITLIST
-        ///******************************************************* MERITLIST SECTION ********************************************************/
+        /******************************************************* MERITLIST SECTION ********************************************************/
         //[HttpGet]
         //public IActionResult AddUpdateMeritList()
         //{
-        //    MeritList ML = new MeritList();
+        //    ModelMeritList ML = new ModelMeritList();
         //    ML.DateCreated = DateTime.Now;
         //    return View(ML);
         //}
@@ -617,7 +665,7 @@ namespace GCCommerce.Controllers
         //        return NotFound();
         //    }
         //    MeritList ML = OurdbContext.MeritList.Find(id);
-        //    if(ML.MeritListId <1 )
+        //    if (ML.MeritListId < 1)
         //    {
         //        return NotFound();
         //    }
@@ -633,9 +681,9 @@ namespace GCCommerce.Controllers
         //    MeritList ML = new MeritList
         //    {
         //        MeritListId = MML.MeritListId,
-        //        FkProgram = MML.FkProgram,
+        //        FkProgram = MML.FkProgramId,
         //        Shift = MML.Shift,
-        //        MeritListValue= MML.MeritListValue,
+        //        MeritListValue = MML.MeritListValue,
         //        DateCreated = MML.DateCreated,
         //        DateUpdated = MML.DateUpdated,
 
@@ -656,6 +704,213 @@ namespace GCCommerce.Controllers
         //    return ML;
         //}
         #endregion
+
+        #region Admission
+
+        /******************************************************* ADMISSION SECTION ********************************************************/
+        [HttpGet]
+        public IActionResult AddUpdateAdmission()
+        {
+            ModelAdmission ma = new ModelAdmission();
+            ma.DateCreated = DateTime.Now.Date;
+            return View(ma);
+        }
+        [HttpGet]
+        public IActionResult UpdateAdmission(int id)
+        {
+            if (id < 1)
+            {
+                return NotFound();
+            }
+            Admission A = OurdbContext.Admission.Find(id);
+            if (A.AdmissionId < 1)
+            {
+                return NotFound();
+            }
+            return View("AddUpdateAdmission", CopyAToMA(A));
+
+        }
+        [HttpPost]
+        public IActionResult AddUpdateAdmission(ModelAdmission MA)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MA);
+            }
+            try
+            {
+                if (MA.AdmissionId > 0)
+                {
+                    MA.DateUpdated = DateTime.Now;
+                    OurdbContext.Admission.Update(CopyMAToA(MA));
+                    OurdbContext.SaveChanges();
+                }
+                else
+                {
+                    OurdbContext.Admission.Add(CopyMAToA(MA));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                TempData["action"] = Constants.FAILED;
+            }
+            return RedirectToAction(nameof(AdministratorController.AdmissionList));
+        }
+
+        public IActionResult AdmissionList()
+        {
+            return View(OurdbContext.Admission.ToList<Admission>());
+        }
+
+        public IActionResult AdmissionDetail(int AdmissionID)
+        {
+            Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
+            return View(obj);
+        }
+        [HttpDelete]
+        public IActionResult AdmissionDelete(int AdmissionID)
+        {
+            Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
+            OurdbContext.Admission.Remove(obj);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.AdmissionList));
+        }
+        private Admission CopyMAToA(ModelAdmission ma)
+        {
+            Admission A = new Admission
+            {
+                AdmissionId = ma.AdmissionId,
+                FkProgramId = ma.FkProgramId,
+                AdmissionEligibilityCriteria=ma.AdmissionEligibilityCriteria,
+                AdmissionDocument=ma.AdmissionDocument,
+                DateCreated = ma.DateCreated,
+                DateUpdated = ma.DateUpdated,
+
+            };
+            return A;
+        }
+
+        private ModelAdmission CopyAToMA(Admission A)
+        {
+            ModelAdmission ma = new ModelAdmission
+            {
+                AdmissionId = A.AdmissionId,
+                FkProgramId = A.FkProgramId,
+                AdmissionEligibilityCriteria = A.AdmissionEligibilityCriteria,
+                AdmissionDocument = A.AdmissionDocument,
+                DateCreated = A.DateCreated,
+                DateUpdated = A.DateUpdated,
+            };
+            return ma;
+        }
+        #endregion
+
+        #region Admission
+
+        /******************************************************* ADMISSION SECTION ********************************************************/
+        [HttpGet]
+        public IActionResult AddUpdateFeeStructure()
+        {
+            ModelFeeStructure MFS = new ModelFeeStructure();
+            MFS.DateCreated = DateTime.Now.Date;
+            return View(MFS);
+        }
+        [HttpGet]
+        public IActionResult UpdateFeeStructure(int id)
+        {
+            if (id < 1)
+            {
+                return NotFound();
+            }
+            FeeStructure FS = OurdbContext.FeeStructure.Find(id);
+            if (FS.Id < 1)
+            {
+                return NotFound();
+            }
+            return View("AddUpdateAdmission", CopyFSToMFS(FS));
+
+        }
+        [HttpPost]
+        public IActionResult AddUpdateFeeStructure(ModelFeeStructure MFS)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MFS);
+            }
+            try
+            {
+                if (MFS.Id > 0)
+                {
+                    MFS.DateUpdated = DateTime.Now;
+                    OurdbContext.FeeStructure.Update(CopyMFSToFS(MFS));
+                    OurdbContext.SaveChanges();
+                }
+                else
+                {
+                    OurdbContext.FeeStructure.Add(CopyMFSToFS(MFS));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                TempData["action"] = Constants.FAILED;
+            }
+            return RedirectToAction(nameof(AdministratorController.FeeStructureList));
+        }
+
+        public IActionResult FeeStructureList()
+        {
+            return View(OurdbContext.FeeStructure.ToList<FeeStructure>());
+        }
+
+        public IActionResult FeeStructureDetail(int FeeStructureID)
+        {
+            FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc. Id == FeeStructureID).FirstOrDefault<FeeStructure>();
+            return View(obj);
+        }
+        [HttpDelete]
+        public IActionResult FeeStructureDelete(int FeeStructureID)
+        {
+            FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc.Id == FeeStructureID).FirstOrDefault<FeeStructure>();
+            OurdbContext.FeeStructure.Remove(obj);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.FeeStructureList));
+        }
+        private FeeStructure CopyMFSToFS(ModelFeeStructure MFS)
+        {
+             FeeStructure FS = new FeeStructure
+            {
+                Id = MFS.Id,
+                FkProgramId = MFS.FkProgramId,
+                Shift = MFS.Shift,
+                Year1 = MFS.Year1,
+                Year2=MFS.Year2,
+                DateCreated = MFS.DateCreated,
+                DateUpdated = MFS.DateUpdated,
+            };
+            return FS;
+        }
+
+        private ModelFeeStructure CopyFSToMFS(FeeStructure FS)
+        {
+            ModelFeeStructure MFS = new ModelFeeStructure
+            {
+                Id = FS.Id,
+                FkProgramId = FS.FkProgramId,
+                Shift = FS.Shift,
+                Year1 = FS.Year1,
+                Year2 = FS.Year2,
+                DateCreated = FS.DateCreated,
+                DateUpdated = FS.DateUpdated,
+            };
+            return MFS;
+        }
+        #endregion
+
+
     }
 
 }
