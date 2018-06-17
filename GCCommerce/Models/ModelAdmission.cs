@@ -14,6 +14,7 @@ namespace GCCommerce.Models
         public int FkProgramId { get; set; }
         [Required(ErrorMessage = " Admission Criteria required.")]
         [StringLength(500)]
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Admission Eligibility Criteria")]
         public string AdmissionEligibilityCriteria { get; set; }
         [Required(ErrorMessage = "Admission Document is required.")]

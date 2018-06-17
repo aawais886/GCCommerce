@@ -650,59 +650,61 @@ namespace GCCommerce.Controllers
 
         #region MERITLIST
         /******************************************************* MERITLIST SECTION ********************************************************/
-        //[HttpGet]
-        //public IActionResult AddUpdateMeritList()
-        //{
-        //    ModelMeritList ML = new ModelMeritList();
-        //    ML.DateCreated = DateTime.Now;
-        //    return View(ML);
-        //}
-        //[HttpGet]
-        //public IActionResult UpdateMeritList(int id)
-        //{
-        //    if (id < 1)
-        //    {
-        //        return NotFound();
-        //    }
-        //    MeritList ML = OurdbContext.MeritList.Find(id);
-        //    if (ML.MeritListId < 1)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View("AddUpdateMeritList", CopyMMLToML(ML));
-        //}
-        //[HttpPost]
-        //public IActionResult AddUpdateMeritList(ModelMeritList Ml)
-        //{
-        //    return View();
-        //}
-        //private MeritList CopyMMLToML(ModelMeritList MML)
-        //{
-        //    MeritList ML = new MeritList
-        //    {
-        //        MeritListId = MML.MeritListId,
-        //        FkProgram = MML.FkProgramId,
-        //        Shift = MML.Shift,
-        //        MeritListValue = MML.MeritListValue,
-        //        DateCreated = MML.DateCreated,
-        //        DateUpdated = MML.DateUpdated,
+        [HttpGet]
+        public IActionResult AddUpdateMeritList()
+        {
+            ModelMeritList ML = new ModelMeritList();
+            ML.DateCreated = DateTime.Now;
+            return View(ML);
+        }
+        [HttpGet]
+        public IActionResult UpdateMeritList(int id)
+        {
+            if (id < 1)
+            {
+                return NotFound();
+            }
+            MeritList ML = OurdbContext.MeritList.Find(id);
+            if (ML.MeritListId < 1)
+            {
+                return NotFound();
+            }
+            return View("AddUpdateMeritList", CopyMLToMML(ML));
+        }
+        [HttpPost]
+        public IActionResult AddUpdateMeritList(ModelMeritList Ml)
+        {
+            return View();
+        }
+        private MeritList CopyMMLToML(ModelMeritList MML)
+        {
+            MeritList ml = new MeritList();
 
-        //    };
-        //    return ML;
-        //}
-        //private MeritList CopyMLToMML(MeritList ML)
-        //{
-        //    ModelMeritList MML = new ModelMeritList
-        //    {
-        //        MeritListId = ML.MeritListId,
-        //        FkProgram = ML.FkProgram,
-        //        Shift = ML.Shift,
-        //        MeritListValue = ML.MeritListValue,
-        //        DateCreated = ML.DateCreated,
-        //        DateUpdated = ML.DateUpdated,
-        //    };
-        //    return ML;
-        //}
+            MeritList ML = new MeritList
+            {
+                MeritListId = MML.MeritListId,
+                FkProgramId = MML.FkProgramId,
+                Shift = MML.Shift,
+                MeritListValue = MML.MeritListValue,
+                DateCreated = MML.DateCreated,
+                DateUpdated = MML.DateUpdated,
+
+            };
+            return ML;
+        }
+        private MeritList CopyMLToMML(MeritList ML)
+        {
+            ModelMeritList MML = new ModelMeritList
+            {
+                MeritListId = ML.MeritListId,
+                FkProgramId = ML.FkProgramId,
+                Shift = ML.Shift,
+                MeritListValue = ML.MeritListValue,
+                DateCreated = ML.DateCreated,
+                DateUpdated = ML.DateUpdated,
+            };
+            return ML;
+        }
         #endregion
 
         #region Admission
@@ -769,10 +771,11 @@ namespace GCCommerce.Controllers
             Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
             return View(obj);
         }
-        [HttpDelete]
+        
         public IActionResult AdmissionDelete(int AdmissionID)
         {
             Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
+            //Admission obj1 = OurdbContext.Admission.Find(AdmissionID);
             OurdbContext.Admission.Remove(obj);
             OurdbContext.SaveChanges();
             return RedirectToAction(nameof(AdministratorController.AdmissionList));
@@ -807,9 +810,9 @@ namespace GCCommerce.Controllers
         }
         #endregion
 
-        #region Admission
+        #region FeeStructure
 
-        /******************************************************* ADMISSION SECTION ********************************************************/
+        /******************************************************* FEESTRUCTURE SECTION ********************************************************/
         [HttpGet]
         public IActionResult AddUpdateFeeStructure()
         {
@@ -829,7 +832,7 @@ namespace GCCommerce.Controllers
             {
                 return NotFound();
             }
-            return View("AddUpdateAdmission", CopyFSToMFS(FS));
+            return View("AddUpdateFeeStructure", CopyFSToMFS(FS));
 
         }
         [HttpPost]
@@ -907,6 +910,109 @@ namespace GCCommerce.Controllers
                 DateUpdated = FS.DateUpdated,
             };
             return MFS;
+        }
+        #endregion
+
+        #region Seats
+
+        /******************************************************* SEATS SECTION ********************************************************/
+        [HttpGet]
+        public IActionResult AddUpdateSeats()
+        {
+            ModelSeats MS = new ModelSeats();
+            MS.DateCreated = DateTime.Now.Date;
+            return View(MS);
+        }
+        [HttpGet]
+        public IActionResult UpdateSeats(int id)
+        {
+            if (id < 1)
+            {
+                return NotFound();
+            }
+            Seats S = OurdbContext.Seats.Find(id);
+            if (S.SeatId < 1)
+            {
+                return NotFound();
+            }
+            return View("AddUpdateSeats", CopySToMS(S));
+
+        }
+        [HttpPost]
+        public IActionResult AddUpdateSeats(ModelSeats MS)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MS);
+            }
+            try
+            {
+                if (MS.SeatId > 0)
+                {
+                    MS.DateUpdated = DateTime.Now;
+                    OurdbContext.Seats.Update(CopyMSToS(MS));
+                    OurdbContext.SaveChanges();
+                }
+                else
+                {
+                    OurdbContext.Seats.Add(CopyMSToS(MS));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                TempData["action"] = Constants.FAILED;
+            }
+            return RedirectToAction(nameof(AdministratorController.SeatsList));
+        }
+
+        public IActionResult SeatsList()
+        {
+            return View(OurdbContext.Seats.ToList<Seats>());
+        }
+
+        public IActionResult SeatsDetail(int SeatsID)
+        {
+            Seats obj = OurdbContext.Seats.Where(abc => abc.SeatId == SeatsID).FirstOrDefault<Seats>();
+            return View(obj);
+        }
+        [HttpDelete]
+        public IActionResult SeatsDelete(int SeatsID)
+        {
+            Seats obj = OurdbContext.Seats.Where(abc => abc.SeatId == SeatsID).FirstOrDefault<Seats>();
+            OurdbContext.Seats.Remove(obj);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.SeatsList));
+        }
+        private Seats CopyMSToS(ModelSeats MS)
+        {
+            Seats S = new Seats
+            {
+               SeatId =MS.SeatId,
+               FkProgramId=MS.FkProgramId,
+               SeatsTotal=MS.SeatsTotal,
+               SeatsAvailable=MS.SeatsAvailable,
+               SeatsReserve=MS.SeatsReserve,
+               DateCreated = MS.DateCreated,
+               DateUpdated = MS.DateUpdated,
+            };
+            return S;
+        }
+
+        private ModelSeats CopySToMS(Seats S)
+        {
+            ModelSeats MS = new ModelSeats
+            {
+                SeatId = S.SeatId,
+                FkProgramId = S.FkProgramId,
+                SeatsTotal = S.SeatsTotal,
+                SeatsAvailable = S.SeatsAvailable,
+                SeatsReserve = S.SeatsReserve,
+                DateCreated = S.DateCreated,
+                DateUpdated = S.DateUpdated,
+            };
+            return MS;
         }
         #endregion
 

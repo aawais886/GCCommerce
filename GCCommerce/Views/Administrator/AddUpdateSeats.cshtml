@@ -1,0 +1,73 @@
+﻿@model GCCommerce.Models.ModelSeats
+
+@{
+    ViewData["Title"] = "AddUpdateSeats";
+}
+
+<h2>AddUpdateSeats</h2>
+
+<h4>ModelSeats</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddUpdateSeats">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="SeatId" class="control-label"></label>
+                <input asp-for="SeatId" class="form-control" />
+                <span asp-validation-for="SeatId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FkProgramId" class="control-label"></label>
+                <input asp-for="FkProgramId" class="form-control" />
+                <span asp-validation-for="FkProgramId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatsTotal" class="control-label"></label>
+                <input asp-for="SeatsTotal" class="form-control" />
+                <span asp-validation-for="SeatsTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatsAvailable" class="control-label"></label>
+                <input asp-for="SeatsAvailable" class="form-control" />
+                <span asp-validation-for="SeatsAvailable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatsReserve" class="control-label"></label>
+                <input asp-for="SeatsReserve" class="form-control" />
+                <span asp-validation-for="SeatsReserve" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="DateUpdated" class="control-label"></label>
+                <input asp-for="DateUpdated" class="form-control" />
+                <span asp-validation-for="DateUpdated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @{
+                    if (Model.SeatId < 1)
+                    {
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Update" class="btn btn-default" />
+
+                    }
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="SeatsList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

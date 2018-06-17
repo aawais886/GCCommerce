@@ -1,0 +1,87 @@
+﻿@model IEnumerable<GCCommerce.Entities.Seats>
+
+@{
+    ViewData["Title"] = "SeatsList";
+}
+
+<h2>SeatsList</h2>
+
+<p>
+    <a asp-action="AddUpdateSeats">Create New</a>
+</p>
+<table class="table" id="table" name="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SeatId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkProgramId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeatsTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeatsAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeatsReserve)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateUpdated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeatId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FkProgramId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeatsTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeatsAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeatsReserve)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @if (item.DateUpdated != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                    }
+                    else
+                    {
+                        <strong>Null</strong>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateSeats", new {  id=item.SeatId  }) |
+                    @Html.ActionLink("Details", "SeatsDetail", new {  id=item.SeatId}) |
+                    @Html.ActionLink("Delete", "SeatsDelete", new {  id=item.SeatId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}

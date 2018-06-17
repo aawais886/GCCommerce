@@ -1,0 +1,60 @@
+﻿@model GCCommerce.Entities.Seats
+
+@{
+    ViewData["Title"] = "SeatsDetail";
+}
+
+<h2>SeatsDetail</h2>
+
+<div>
+    <h4>Seats</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SeatId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FkProgramId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FkProgramId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SeatsTotal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsAvailable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SeatsAvailable)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsReserve)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SeatsReserve)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateUpdated)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="SeatsList">Back to List</a>
+</div>
