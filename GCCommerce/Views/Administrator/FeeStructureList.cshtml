@@ -14,7 +14,7 @@
 <table class="table" id="table" name="table">
     <thead>
         <tr>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
@@ -29,10 +29,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.Year2)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
-            <th> 
+            <th hidden> 
                 @Html.DisplayNameFor(model => model.DateUpdated)               
             </th>
             <th></th>
@@ -42,7 +42,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td hidden>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
@@ -57,10 +57,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Year2)
                 </td>
-                <td>
+                <td hidden>
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
-                <td>
+                <td hidden>
                     @if (item.DateUpdated != null)
                     {
                         @Html.DisplayFor(modelItem => item.DateUpdated)

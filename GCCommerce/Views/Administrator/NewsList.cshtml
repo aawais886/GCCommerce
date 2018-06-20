@@ -14,16 +14,16 @@
 <table class="table" id="table" name="table">
     <thead>
         <tr>
-            <th>
+            <th hidden> 
                 @Html.DisplayNameFor(model => model.NewsId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NewsValue)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.DateUpdated)
             </th>
             <th></th>
@@ -33,16 +33,16 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td hidden>
                     @Html.DisplayFor(modelItem => item.NewsId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NewsValue)
                 </td>
-                <td>
+                <td hidden>
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
-                <td>
+                <td hidden>
                     @if (item.DateUpdated != null)
                     {
                         @Html.DisplayFor(modelItem => item.DateUpdated)
@@ -51,7 +51,7 @@
                     else
                     {
                         <strong>Null</strong>
-                    }
+                    } 
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "UpdateNews", new { id = item.NewsId }) |

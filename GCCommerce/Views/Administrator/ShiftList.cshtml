@@ -14,16 +14,16 @@
 <table class="table" id="table" name="table">
     <thead>
         <tr>
-                <th>
+                <th hidden>
                     @Html.DisplayNameFor(model => model.ShiftId)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Shift1)
                 </th>
-                <th>
+                <th hidden>
                     @Html.DisplayNameFor(model => model.DateCreated)
                 </th>
-                <th>
+                <th hidden>
                     @Html.DisplayNameFor(model => model.DateUpdated)
                 </th>
             <th></th>
@@ -32,16 +32,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td hidden>
                 @Html.DisplayFor(modelItem => item.ShiftId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Shift1)
             </td>
-            <td>
+            <td hidden>
                 @Html.DisplayFor(modelItem => item.DateCreated)
             </td>
-            <td>
+            <td hidden>
                 @if (item.DateUpdated != null)
                 {
                     @Html.DisplayFor(modelItem => item.DateUpdated)
