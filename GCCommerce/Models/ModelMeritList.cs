@@ -17,6 +17,7 @@ namespace GCCommerce.Models
 
         [Required (ErrorMessage ="Enter MeritList Value")]
         [Display(Name ="Merit List Value")]
+        [DataType(DataType.MultilineText)]
         public string MeritListValue { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }

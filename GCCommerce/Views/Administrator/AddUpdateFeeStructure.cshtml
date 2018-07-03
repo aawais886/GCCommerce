@@ -1,32 +1,40 @@
 ﻿@model GCCommerce.Models.ModelFeeStructure
+@using GCCommerce.Helpers;
+@using Microsoft.AspNetCore.Http;
+@using GCCommerce.Entities;
 
 @{
     ViewData["Title"] = "AddUpdateFeeStructure";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
+    IList<Program> ILP = ViewBag.vb;
+    IList<Shift> ILS = ViewBag.vbs;
 }
 
 <h2>AddUpdateFeeStructure</h2>
 
-<h4>ModelFeeStructure</h4> 
+<h4>ModelFeeStructure</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddUpdateFeeStructure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group" >
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="FkProgramId" class="control-label"></label>
-                <input asp-for="FkProgramId" class="form-control" />
+                @*<input asp-for="FkProgramId" class="form-control" />*@
+                @Html.DropDownListFor(model => model.FkProgramId, new SelectList(ILP, "ProgramId", "ProgramTitle"), "---Select Program", new { @class = "form-control" })
+
                 <span asp-validation-for="FkProgramId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Shift" class="control-label"></label>
-                <input asp-for="Shift" class="form-control" />
+               @* <input asp-for="Shift" class="form-control" />*@
+                @Html.DropDownListFor(model => model.Shift, new SelectList(ILS, "ShiftId", "Shift1"), "---Select Shift---", new { @class = "form-control" })
+
                 <span asp-validation-for="Shift" class="text-danger"></span>
             </div>
             <div class="form-group">

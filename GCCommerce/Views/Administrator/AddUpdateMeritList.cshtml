@@ -1,41 +1,42 @@
-﻿@model GCCommerce.Models.ModelProgram
+﻿@model GCCommerce.Models.ModelMeritList
 @using GCCommerce.Helpers;
 @using Microsoft.AspNetCore.Http;
 @using GCCommerce.Entities;
 
-
 @{
-    ViewData["Title"] = "AddUpdateProgram";
- Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "AddUpdateMeritList";
 
- IList<Shift> ILS = ViewBag.vb;
-
+    IList<Program> ILP = ViewBag.vb;
 }
 
-<h2>AddUpdateProgram</h2>
+<h2>AddUpdateMeritList</h2>
 
-<h4>ModelProgram</h4>
+<h4>ModelMeritList</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddUpdateProgram">
+        <form asp-action="AddUpdateMeritList">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group" hidden>
-                <label asp-for="ProgramId" class="control-label"></label>
-                <input asp-for="ProgramId" class="form-control" />
-                <span asp-validation-for="ProgramId" class="text-danger"></span>
+                <label asp-for="MeritListId" class="control-label"></label>
+                <input asp-for="MeritListId" class="form-control" />
+                <span asp-validation-for="MeritListId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FkShiftId" class="control-label"></label>
-                @*<input asp-for="FkShiftId" class="form-control" />*@
-                @*<select asp-for="FkShiftId" class="form-control" asp-item="" asp-items="@ViewBag.ILS"></select>*@
-                @Html.DropDownListFor(model => model.FkShiftId, new SelectList(ILS, "ShiftId", "Shift1"), "---Select Shift---", new { @class = "form-control" })
-                <span asp-validation-for="FkShiftId" class="text-danger"></span>
+                <label asp-for="FkProgramId" class="control-label"></label>
+                @*<input asp-for="FkProgramId" class="form-control" />*@
+                @Html.DropDownListFor(model => model.FkProgramId, new SelectList(ILP, "ProgramId", "ProgramTitle"), "---Select Program", new { @class = "form-control" })
+                <span asp-validation-for="FkProgramId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProgramTitle" class="control-label"></label>
-                <input asp-for="ProgramTitle" class="form-control" />
-                <span asp-validation-for="ProgramTitle" class="text-danger"></span>
+                <label asp-for="Shift" class="control-label"></label>
+                <input asp-for="Shift" class="form-control" />
+                <span asp-validation-for="Shift" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MeritListValue" class="control-label"></label>
+                <input asp-for="MeritListValue" class="form-control" />
+                <span asp-validation-for="MeritListValue" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
                 <label asp-for="DateCreated" class="control-label"></label>
@@ -49,13 +50,14 @@
             </div>
             <div class="form-group">
                 @{
-                    if (Model.ProgramId < 1)
+                    if (Model.MeritListId < 1)
                     {
                         <input type="submit" value="Create" class="btn btn-default" />
                     }
                     else
                     {
                         <input type="submit" value="Update" class="btn btn-default" />
+
                     }
                 }
             </div>
@@ -64,9 +66,10 @@
 </div>
 
 <div>
-    <a asp-action="ProgramList">Back to List</a>
+    <a asp-action="MeritListList">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

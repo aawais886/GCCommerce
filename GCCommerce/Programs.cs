@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GCCommerce
 {
-    public class Program
+    public class Programs
     {
         public static void Main(string[] args)
         {

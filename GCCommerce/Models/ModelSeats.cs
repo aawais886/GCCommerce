@@ -13,6 +13,9 @@ namespace GCCommerce.Models
         public int FkProgramId { get; set; }
         [Required]
         [Display(Name ="Total Seats")]
+        //[Range(0.0, Double.MaxValue)]
+        [Range(0, 1000,
+        ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int SeatsTotal { get; set; }
         [Required]
         [Display(Name = "AvailAble Seats")]

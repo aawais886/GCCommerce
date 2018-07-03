@@ -1,11 +1,14 @@
 ﻿@model GCCommerce.Models.ModelAdmission
+@using GCCommerce.Helpers;
+@using Microsoft.AspNetCore.Http;
+@using GCCommerce.Entities;
 
 @{
     ViewData["Title"] = "AddUpdateAdmission";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
+    IList<Program> ILP = ViewBag.vb;
 }
-
 <h2>AddUpdateAdmission</h2>
 
 <h4>ModelAdmission</h4>
@@ -21,7 +24,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="FkProgramId" class="control-label"></label>
-                <input asp-for="FkProgramId" class="form-control" />
+                @*<select asp-for="FkProgramId" class="form-control" @*asp-item="@(new SelectList(@ViewBag.Fkprogramlist, "ProgramId", "ProgramTitle"))"></select>*@
+                @Html.DropDownListFor(model => model.FkProgramId, new SelectList(ILP, "ProgramId", "ProgramTitle"), "---Select Program", new { @class = "form-control" })
                 <span asp-validation-for="FkProgramId" class="text-danger"></span>
             </div>
             <div class="form-group">

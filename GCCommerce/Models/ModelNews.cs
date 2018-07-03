@@ -12,6 +12,7 @@ namespace GCCommerce.Models
         [Required(ErrorMessage = "News Value is required.")]
         [StringLength(500)]
         [Display(Name = "News Value")]
+        [DataType(DataType.MultilineText)]
         public string NewsValue { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }

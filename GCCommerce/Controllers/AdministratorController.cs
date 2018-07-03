@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GCCommerce.Controllers
 {
@@ -91,7 +92,6 @@ namespace GCCommerce.Controllers
             News obj = OurdbContext.News.Where(abc => abc.NewsId == NewsID).FirstOrDefault();
             return View(obj);
         }
-        [HttpDelete]
         public IActionResult NewsDelete(int NewsID)
         {
             News obj = OurdbContext.News.Where(abc => abc.NewsId == NewsID).FirstOrDefault<News>();
@@ -557,6 +557,10 @@ namespace GCCommerce.Controllers
         {
             ModelProgram MP = new ModelProgram();
             MP.DateCreated = DateTime.Now;
+
+            //TempData["ILS"] = new SelectList(OurdbContext.Shift, "ShiftId", "Shift1", "0");
+            IList<Shift> ILS = OurdbContext.Shift.ToList();
+            ViewBag.vb = ILS;
             return View(MP);
         }
         [HttpGet]
@@ -603,8 +607,7 @@ namespace GCCommerce.Controllers
             }
 
             return RedirectToAction(nameof(AdministratorController.ProgramList));
-        }
-     
+        }     
         public IActionResult ProgramList()
         {
             return View(OurdbContext.Program.ToList());
@@ -655,6 +658,8 @@ namespace GCCommerce.Controllers
         {
             ModelMeritList ML = new ModelMeritList();
             ML.DateCreated = DateTime.Now;
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
             return View(ML);
         }
         [HttpGet]
@@ -672,10 +677,54 @@ namespace GCCommerce.Controllers
             return View("AddUpdateMeritList", CopyMLToMML(ML));
         }
         [HttpPost]
-        public IActionResult AddUpdateMeritList(ModelMeritList Ml)
+        public IActionResult AddUpdateMeritList(ModelMeritList MML)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                TempData["Action"] = Constants.FAILED;
+                return View(MML);
+            }
+            try
+            {
+                if (MML.MeritListId > 0)
+                {
+                    MML.DateUpdated = DateTime.Now;
+                    OurdbContext.MeritList.Update(CopyMMLToML(MML));
+                    OurdbContext.SaveChanges();
+                }
+                else
+                {
+                    OurdbContext.MeritList.Add(CopyMMLToML(MML));
+                    OurdbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                TempData["Action"] = Constants.FAILED;
+            }
+
+            return RedirectToAction(nameof(AdministratorController.MeritListList));
         }
+        public IActionResult MeritListList()
+        {
+            return View(OurdbContext.MeritList.ToList());
+        }
+
+        public IActionResult MeritListDetail(int MeritListID)
+        {
+           //MeritList ML = OurdbContext.MeritList.Where(abc => abc.MeritListId == MeritListID).FirstOrDefault();
+            MeritList ML = OurdbContext.MeritList.Find(MeritListID);
+            return View(ML);            
+        }
+
+        public IActionResult MeritListDelete(int MeritListID)
+        {
+            MeritList ML = OurdbContext.MeritList.Find(MeritListID);
+            OurdbContext.MeritList.Remove(ML);
+            OurdbContext.SaveChanges();
+            return RedirectToAction(nameof(AdministratorController.MeritListList));
+        }
+
         private MeritList CopyMMLToML(ModelMeritList MML)
         {
             MeritList ml = new MeritList();
@@ -714,8 +763,13 @@ namespace GCCommerce.Controllers
         public IActionResult AddUpdateAdmission()
         {
             ModelAdmission ma = new ModelAdmission();
-            ma.DateCreated = DateTime.Now.Date;
-            return View(ma);
+            ma.DateCreated = DateTime.Now;
+            //List<Entities.Program> ILP = new List<Entities.Program>();
+            //ILP = (from Program in OurdbContext.Program select Program).ToList<Entities.Program>();
+            //ILP.Insert(0, new Entities.Program { ProgramId = 0, ProgramTitle = "Select" });
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
+             return View(ma);
         }
         [HttpGet]
         public IActionResult UpdateAdmission(int id)
@@ -818,6 +872,11 @@ namespace GCCommerce.Controllers
         {
             ModelFeeStructure MFS = new ModelFeeStructure();
             MFS.DateCreated = DateTime.Now.Date;
+            IList<Program> ILP = OurdbContext.Program.ToList();           
+            ViewBag.vb = ILP;
+            IList<Shift> ILS = OurdbContext.Shift.ToList();
+            ViewBag.vbs = ILS;
+          
             return View(MFS);
         }
         [HttpGet]
@@ -921,6 +980,8 @@ namespace GCCommerce.Controllers
         {
             ModelSeats MS = new ModelSeats();
             MS.DateCreated = DateTime.Now.Date;
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
             return View(MS);
         }
         [HttpGet]

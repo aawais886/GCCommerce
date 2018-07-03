@@ -16,6 +16,7 @@ namespace GCCommerce.Models
         [Required(ErrorMessage = "Event Description is required.")]
         [StringLength(500)]
         [Display(Name = "Event Description")]
+        [DataType(DataType.MultilineText)]
         public string EventDescription { get; set; }
         public DateTime? EventDate { get; set; }
         public DateTime? DateCreated { get; set; }

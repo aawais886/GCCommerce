@@ -16,6 +16,7 @@ namespace GCCommerce.Models
         [Required(ErrorMessage = "Image Description is required.")]
         [StringLength(200)]
         [Display(Name = "Image Description")]
+        [DataType(DataType.MultilineText)]
         public string GalleryImageDescription { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
