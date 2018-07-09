@@ -557,8 +557,6 @@ namespace GCCommerce.Controllers
         {
             ModelProgram MP = new ModelProgram();
             MP.DateCreated = DateTime.Now;
-
-            //TempData["ILS"] = new SelectList(OurdbContext.Shift, "ShiftId", "Shift1", "0");
             IList<Shift> ILS = OurdbContext.Shift.ToList();
             ViewBag.vb = ILS;
             return View(MP);
@@ -576,6 +574,8 @@ namespace GCCommerce.Controllers
             {
                 return NotFound();
             }
+            IList<Shift> ILS = OurdbContext.Shift.ToList();
+            ViewBag.vb = ILS;
             return View("AddUpdateProgram", CopyPToMP(P));
         }
         [HttpPost]
@@ -610,7 +610,16 @@ namespace GCCommerce.Controllers
         }     
         public IActionResult ProgramList()
         {
-            return View(OurdbContext.Program.ToList());
+            IList<ModelProgramList> obj = (from a in OurdbContext.Program
+                                           join b in OurdbContext.Shift on a.FkShiftId equals b.ShiftId
+                                           select new ModelProgramList
+                                           {
+                                               Id =a.ProgramId,
+                                               ProgramShift = b.Shift1,
+                                               ProgramTitle = a.ProgramTitle
+                                           }).ToList();
+
+            return View(obj);
         }
         public IActionResult ProgramDetail(int ProgramID)
         {
@@ -619,12 +628,12 @@ namespace GCCommerce.Controllers
         }
         public IActionResult ProgramDelete(int ProgramID)
         {
-            Entities.Program obj = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
+            Program obj = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
             OurdbContext.Program.Remove(obj);
             OurdbContext.SaveChanges();
             return RedirectToAction(nameof(AdministratorController.ProgramList));
         }
-        private Entities.Program CopyMPToP(ModelProgram MP)
+        private Program CopyMPToP(ModelProgram MP)
         {
             Entities.Program P = new Entities.Program
             {
@@ -636,7 +645,7 @@ namespace GCCommerce.Controllers
             };
             return P;
         }
-        private ModelProgram CopyPToMP(Entities.Program P)
+        private ModelProgram CopyPToMP(Program P)
         {
             ModelProgram MP = new ModelProgram
             {
@@ -674,6 +683,8 @@ namespace GCCommerce.Controllers
             {
                 return NotFound();
             }
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
             return View("AddUpdateMeritList", CopyMLToMML(ML));
         }
         [HttpPost]
@@ -707,7 +718,7 @@ namespace GCCommerce.Controllers
         }
         public IActionResult MeritListList()
         {
-            return View(OurdbContext.MeritList.ToList());
+                     return View(OurdbContext.MeritList.ToList());
         }
 
         public IActionResult MeritListDetail(int MeritListID)
@@ -764,9 +775,6 @@ namespace GCCommerce.Controllers
         {
             ModelAdmission ma = new ModelAdmission();
             ma.DateCreated = DateTime.Now;
-            //List<Entities.Program> ILP = new List<Entities.Program>();
-            //ILP = (from Program in OurdbContext.Program select Program).ToList<Entities.Program>();
-            //ILP.Insert(0, new Entities.Program { ProgramId = 0, ProgramTitle = "Select" });
             IList<Program> ILP = OurdbContext.Program.ToList();
             ViewBag.vb = ILP;
              return View(ma);
@@ -783,6 +791,8 @@ namespace GCCommerce.Controllers
             {
                 return NotFound();
             }
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
             return View("AddUpdateAdmission", CopyAToMA(A));
 
         }
@@ -817,7 +827,17 @@ namespace GCCommerce.Controllers
 
         public IActionResult AdmissionList()
         {
-            return View(OurdbContext.Admission.ToList<Admission>());
+            IList<ModelAdmissionList> obj = (from a in OurdbContext.Admission
+                                    join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
+                                    select new ModelAdmissionList
+                                    {
+                                        AdmissonID = a.AdmissionId,
+                                        ProgramTitle = b.ProgramTitle,
+                                        AdmissionEligibilityCriteria = a.AdmissionEligibilityCriteria,
+                                        AdmissionDocument = a.AdmissionDocument
+
+                                    }).ToList();
+            return View(obj);
         }
 
         public IActionResult AdmissionDetail(int AdmissionID)
@@ -925,7 +945,16 @@ namespace GCCommerce.Controllers
 
         public IActionResult FeeStructureList()
         {
-            return View(OurdbContext.FeeStructure.ToList<FeeStructure>());
+            IList<ModelFeeStructureList> obj = (from a in OurdbContext.FeeStructure
+                                                join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId                                                select new ModelFeeStructureList
+                                                {
+                                                    Id =a.Id,
+                                                    ProgramTitle =b.ProgramTitle, 
+                                                    Shift=a.Shift,
+                                                    Year1=a.Year1,
+                                                    Year2=a.Year2
+                                                }).ToList();
+            return View(obj);
         }
 
         public IActionResult FeeStructureDetail(int FeeStructureID)
@@ -996,6 +1025,8 @@ namespace GCCommerce.Controllers
             {
                 return NotFound();
             }
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
             return View("AddUpdateSeats", CopySToMS(S));
 
         }
@@ -1030,7 +1061,21 @@ namespace GCCommerce.Controllers
 
         public IActionResult SeatsList()
         {
-            return View(OurdbContext.Seats.ToList<Seats>());
+            IList<ModelSeatsList> obj = (from a in OurdbContext.Seats
+                                         join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
+                                         select new ModelSeatsList
+                                         {
+                                             Id=a.SeatId,
+                                             ProgramTitle=b.ProgramTitle,
+                                             TotalSeats=a.SeatsTotal,
+                                             AvailAbleSeats=a.SeatsAvailable,
+                                             ReserveSeats=a.SeatsReserve
+
+                                         }).ToList();
+            
+
+
+            return View(obj);
         }
 
         public IActionResult SeatsDetail(int SeatsID)

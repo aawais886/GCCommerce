@@ -1,9 +1,8 @@
-﻿@model IEnumerable<GCCommerce.Entities.Program>
+﻿@model IEnumerable<GCCommerce.Models.ModelProgramList>
 
 @{
     ViewData["Title"] = "ProgramList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
 }
 
 <h2>ProgramList</h2>
@@ -11,23 +10,17 @@
 <p>
     <a asp-action="AddUpdateProgram">Create New</a>
 </p>
-<table class="table" id="table" name="table">
+<table class="table">
     <thead>
         <tr>
                 <th hidden>
-                    @Html.DisplayNameFor(model => model.ProgramId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FkShiftId)
+                    @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ProgramTitle)
                 </th>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.DateCreated)
-                </th>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.DateUpdated)
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramShift)
                 </th>
             <th></th>
         </tr>
@@ -36,42 +29,20 @@
 @foreach (var item in Model) {
         <tr>
             <td hidden>
-                @Html.DisplayFor(modelItem => item.ProgramId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkShiftId)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProgramTitle)
             </td>
-            <td hidden>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td hidden>
-                @if (item.DateUpdated != null)
-                {
-                    @Html.DisplayFor(modelItem => item.DateUpdated)
-
-                }
-                else
-                {
-                    <strong>Null</strong>
-                }
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramShift)
             </td>
             <td>
-                @Html.ActionLink("Edit", "UpdateProgram", new {  id=item.ProgramId }) |
-                @Html.ActionLink("Details", "ProgramDetail", new { ProgramID = item.ProgramId }) |
-                @Html.ActionLink("Delete", "ProgramDelete", new { ProgramID = item.ProgramId })
+                @Html.ActionLink("Edit", "UpdateProgram", new { id=item.Id }) |
+                @Html.ActionLink("Details", "ProgramDetail", new { ProgramID = item.Id}) |
+                @Html.ActionLink("Delete", "ProgramDelete", new { ProgramID = item.Id })
             </td>
         </tr>
 }
     </tbody>
 </table>
-@section scripts{ 
-    <script>
-        $(document).ready(function () {
-            $('#table').DataTable();
-
-        });
-    </script>
-}

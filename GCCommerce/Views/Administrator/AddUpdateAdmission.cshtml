@@ -4,10 +4,19 @@
 @using GCCommerce.Entities;
 
 @{
-    ViewData["Title"] = "AddUpdateAdmission";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    if(Model.AdmissionId<1)
+    {
+        ViewData["Title"] = "AddUpdateAdmission";
+    }
+    else
+    {
+        ViewData["Title"] = "AddUpdateAdmission";
 
-    IList<Program> ILP = ViewBag.vb;
+
+    }
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    IList <Program> ILP = ViewBag.vb;
 }
 <h2>AddUpdateAdmission</h2>
 

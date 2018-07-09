@@ -20,7 +20,7 @@ $(document).ready( function() {
   // then onMonthChange (if the month changed).
   // finally onYearChange (if the year changed).
 
-  calendars.clndr1 = $('.cal1').clndr({
+    calendars.clndr1 = $('.cal1').clndr({
     events: eventArray,
     // constraints: {
     //   startDate: '2013-11-01',

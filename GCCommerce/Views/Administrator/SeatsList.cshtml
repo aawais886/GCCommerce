@@ -1,9 +1,8 @@
-﻿@model IEnumerable<GCCommerce.Entities.Seats>
+﻿@model IEnumerable<GCCommerce.Models.ModelSeatsList>
 
 @{
     ViewData["Title"] = "SeatsList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
 }
 
 <h2>SeatsList</h2>
@@ -11,79 +10,51 @@
 <p>
     <a asp-action="AddUpdateSeats">Create New</a>
 </p>
-<table class="table" id="table" name="table">
+<table class="table">
     <thead>
         <tr>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.SeatId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FkProgramId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SeatsTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SeatsAvailable)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SeatsReserve)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.DateUpdated)
-            </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalSeats)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AvailAbleSeats)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReserveSeats)
+                </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.SeatId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FkProgramId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SeatsTotal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SeatsAvailable)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SeatsReserve)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.DateCreated)
-                </td>
-                <td hidden>
-                    @if (item.DateUpdated != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.DateUpdated)
-                    }
-                    else
-                    {
-                        <strong>Null</strong>
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "UpdateSeats", new {  id=item.SeatId  }) |
-                    @Html.ActionLink("Details", "SeatsDetail", new {  id=item.SeatId}) |
-                    @Html.ActionLink("Delete", "SeatsDelete", new {  id=item.SeatId })
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailAbleSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReserveSeats)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateSeats", new {  id=item.Id }) |
+                @Html.ActionLink("Details", "SeatsDetail", new { SeatsID = item.Id}) |
+                @Html.ActionLink("Delete", "SeatsDelete", new { SeatsID= item.Id })
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $('#table').DataTable();
-
-    });
-    </script>
-}
