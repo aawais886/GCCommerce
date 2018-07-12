@@ -6,10 +6,10 @@
 
 }
 
-<h2>TeacherList</h2>
+<h2>Teacher List</h2>
 
 <p>
-    <a asp-action="AddUpdateTeacher">Create New</a>
+    <a asp-action="AddUpdateTeacher" class="btn btn-primary pull-right">Create New</a>
 </p>
 <table class="table" id="table" name="table">
     <thead>
@@ -103,9 +103,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateTeacher", new { id=item.TeacherId }) |
-                    @Html.ActionLink("Details", "TeacherDetail", new { TeacherID = item.TeacherId }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Edit", "UpdateTeacher", new { id=item.TeacherId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "TeacherDetail", new { TeacherID = item.TeacherId }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

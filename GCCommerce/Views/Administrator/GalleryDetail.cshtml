@@ -6,10 +6,10 @@
 
 }
 
-<h2>GalleryDetail</h2>
+<h2>Gallery Detail</h2>
 
 <div>
-    <h4>Gallery</h4>
+    <h4 hidden>Gallery</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -44,7 +44,12 @@
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "UpdateGallery", new { id = Model.GalleryId }) |
-    <a asp-action="GalleryList">Back to List</a>
-</div>
+<div class="col-md-8">
+    <div class="col-md-4">
+            @Html.ActionLink("Edit", "UpdateGallery", new { id = Model.GalleryId }, new { @class = "btn btn-success center-block" })
+        </div>
+        <div class="col-md-4">
+            <a asp-action="GalleryList" class="btn btn-danger form-control-static center-block">Back to List</a>
+        </div>
+    </div>
+

@@ -6,10 +6,10 @@
 
 }
 
-<h2>ProgramDetail</h2>
+<h2>Program Detail</h2>
 
 <div>
-    <h4>Program</h4>
+    <h4 hidden>Program</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -44,7 +44,12 @@
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "UpdateProgram", new { id = Model.ProgramId}) |
-    <a asp-action="ProgramList">Back to List</a>
+
+<div class="col-md-8">
+    <div class="col-md-4">
+        @Html.ActionLink("Edit", "UpdateProgram", new { id = Model.ProgramId }, new { @class = "btn btn-success center-block" })
+    </div>
+    <div class="col-md-4">
+        <a asp-action="ProgramList" class="btn btn-danger form-control-static center-block">Back to List</a>
+    </div>
 </div>

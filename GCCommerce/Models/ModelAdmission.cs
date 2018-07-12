@@ -10,7 +10,7 @@ namespace GCCommerce.Models
     {
         [Key]
         public int AdmissionId { get; set; }
-
+        [Display(Name = "Select Program")]
         public int FkProgramId { get; set; }
         [Required(ErrorMessage = " Admission Criteria required.")]
         [StringLength(500)]

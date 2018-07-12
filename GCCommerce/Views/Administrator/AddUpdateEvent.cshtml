@@ -1,4 +1,7 @@
 ﻿@model GCCommerce.Models.ModelEvent
+@using GCCommerce.Helpers;
+@using Microsoft.AspNetCore.Http;
+@using GCCommerce.Entities;
 
 @{
     ViewData["Title"] = "AddUpdateEvent";
@@ -6,9 +9,17 @@
 
 }
 
-<h2>AddUpdateEvent</h2>
-
-<h4>ModelEvent</h4>
+@{
+    if (Model.EventId < 1)
+    {
+        <h2 class="center-block">Add New Event</h2>
+    }
+    else
+    {
+        <h2 class="center-block">Update Event</h2>
+    }
+}
+<h4 hidden>ModelEvent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -49,11 +60,11 @@
                     if (Model.EventId < 1)
                     {
 
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input type="submit" value="Update" class="btn btn-default" />
+                        <input type="submit" value="Update" class="btn btn-warning" />
 
                     }
                 }
@@ -62,8 +73,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="EventList">Back to List</a>
+<div  class="form-control-static">
+    <a asp-action="EventList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {

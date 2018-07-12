@@ -6,15 +6,22 @@
 
 @{
     ViewData["Title"] = "AddUpdateProgram";
- Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
- IList<Shift> ILS = ViewBag.vb;
-
+    IList<Shift> ILS = ViewBag.vb;
+}
+@{
+    if (Model.ProgramId < 1)
+    {
+        <h2>Add Program</h2>
+    }
+    else
+    {
+        <h2>Update Program</h2>
+    }
 }
 
-<h2>AddUpdateProgram</h2>
-
-<h4>ModelProgram</h4>
+<h4 hidden>ModelProgram</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -51,11 +58,11 @@
                 @{
                     if (Model.ProgramId < 1)
                     {
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input type="submit" value="Update" class="btn btn-default" />
+                        <input type="submit" value="Update" class="btn btn-warning" />
                     }
                 }
             </div>
@@ -63,8 +70,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="ProgramList">Back to List</a>
+<div class="form-control-static">
+    <a asp-action="ProgramList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {

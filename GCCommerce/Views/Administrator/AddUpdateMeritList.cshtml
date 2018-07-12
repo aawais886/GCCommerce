@@ -5,13 +5,23 @@
 
 @{
     ViewData["Title"] = "AddUpdateMeritList";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
     IList<Program> ILP = ViewBag.vb;
+    IList<Shift> ILS = ViewBag.vbs;
+}
+@{
+    if (Model.MeritListId < 1)
+    {
+        <h2>Add New Merit List</h2>
+    }
+    else
+    {
+        <h2>Update Merit List</h2>
+    }
 }
 
-<h2>AddUpdateMeritList</h2>
-
-<h4>ModelMeritList</h4>
+<h4 hidden>ModelMeritList</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,7 +40,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Shift" class="control-label"></label>
-                <input asp-for="Shift" class="form-control" />
+                @* <input asp-for="Shift" class="form-control" />*@
+                @Html.DropDownListFor(model => model.Shift, new SelectList(ILS, "ShiftId", "Shift1"), "---Select Shift---", new { @class = "form-control" })
+
                 <span asp-validation-for="Shift" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,11 +64,11 @@
                 @{
                     if (Model.MeritListId < 1)
                     {
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input type="submit" value="Update" class="btn btn-default" />
+                        <input type="submit" value="Update" class="btn btn-warning" />
 
                     }
                 }
@@ -66,7 +78,7 @@
 </div>
 
 <div>
-    <a asp-action="MeritListList">Back to List</a>
+    <a asp-action="MeritListList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {

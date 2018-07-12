@@ -1,81 +1,60 @@
-﻿@model IEnumerable<GCCommerce.Entities.MeritList>
+﻿@model IEnumerable<GCCommerce.Models.ModelMeritListList>
 
 @{
     ViewData["Title"] = "MeritListList";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>MeritListList</h2>
+<h2>MeritList List</h2>
 
 <p>
-    <a asp-action="AddUpdateMeritList">Create New</a>
+    <a asp-action="AddUpdateMeritList" class="btn btn-primary pull-right">Create New</a>
 </p>
-<table class="table" id="table" name="table">
+<table class="table">
     <thead>
         <tr>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.MeritListId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FkProgramId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shift)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MeritListValue)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.DateUpdated)
-            </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.ID)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.FKProgramID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProgramTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shift)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MeritListValue)
+                </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.MeritListId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FkProgramId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Shift)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MeritListValue)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.DateCreated)
-                </td>
-                <td hidden>
-                    @if (item.DateUpdated != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.DateUpdated)
-                    }
-                    else
-                    {
-                        <strong>Null</strong>
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "UpdateMeritList", new { id = item.MeritListId}) |
-                    @Html.ActionLink("Details", "MeritListDetail", new { MeritListID = item.MeritListId }) |
-                    @Html.ActionLink("Delete", "MeritListDelete", new { MeritListID = item.MeritListId })
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.FKProgramID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shift)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeritListValue)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateMeritList", new { id=item.ID }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "MeritListDetail", new { MeritListID = item.ID }, new { @class = "btn btn-small btn-primary" }) |
+                @Html.ActionLink("Delete", "MeritListDelete", new { MeritListID = item.ID }, new { @class = "btn btn-small  btn-danger" })
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $('#table').DataTable();
-
-    });
-    </script>
-}

@@ -10,6 +10,8 @@ namespace GCCommerce.Models
     {
         [Key]
         public int SeatId { get; set; }
+        [Required]
+        [Display(Name ="Select Program")]
         public int FkProgramId { get; set; }
         [Required]
         [Display(Name ="Total Seats")]

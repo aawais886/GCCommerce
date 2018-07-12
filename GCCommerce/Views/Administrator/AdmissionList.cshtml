@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>AdmissionList</h2>
-
+<h2 class="center-block">Admission List</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AddUpdateAdmission" class="btn btn-primary pull-right">Create New</a>
 </p>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -44,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.AdmissionDocument)
             </td>
             <td>
-                @Html.ActionLink("Edit", "UpdateAdmission", new { id=item.AdmissonID }) |
-                @*@Html.ActionLink("Details", "Details", new { AdmissionID=item.Admission }) |*@
-                @Html.ActionLink("Delete", "AdmissionDelete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID } , new { @class = "btn btn-success" })|
+                @Html.ActionLink("Details", "Details", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small btn-primary" }) |
+                @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small  btn-danger" })
             </td>
         </tr>
 }

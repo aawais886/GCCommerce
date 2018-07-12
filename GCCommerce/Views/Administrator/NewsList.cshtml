@@ -6,10 +6,10 @@
 
 }
 
-<h2>NewsList</h2>
+<h2>News List</h2>
 
 <p>
-    <a asp-action="AddUpdateNews">Create New</a>
+    <a asp-action="AddUpdateNews" class="btn btn-primary pull-right">Create New</a>
 </p>
 <table class="table" id="table" name="table">
     <thead>
@@ -54,9 +54,9 @@
                     } 
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateNews", new { id = item.NewsId }) |
-                    @Html.ActionLink("Details", "NewsDetail", new { id = item.NewsId }) |
-                    @Html.ActionLink("Delete", "NewsDelete", new { id = item.NewsId })
+                    @Html.ActionLink("Edit", "UpdateNews", new { id = item.NewsId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "NewsDetail", new { NewsID = item.NewsId }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "NewsDelete", new { NewsID = item.NewsId }, new { @class = "btn btn-small  btn-danger" })
                 </td>
             </tr>
         }

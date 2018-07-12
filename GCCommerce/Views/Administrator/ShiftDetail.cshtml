@@ -6,10 +6,10 @@
 
 }
 
-<h2>ShiftDetail</h2>
+<h2>Shift Detail</h2>
 
 <div>
-    <h4>Shift</h4>
+    <h4 hidden>Shift</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,7 +38,11 @@
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "UpdateShift", new {  id = Model.ShiftId}) |
-    <a asp-action="ShiftList">Back to List</a>
+<div class="col-md-8">
+    <div class="col-md-4">
+        @Html.ActionLink("Edit", "UpdateShift", new { id = Model.ShiftId }, new { @class = "btn btn-success center-block" }) 
+    </div>
+        <div class="col-md-4">
+            <a asp-action="ShiftList" class="btn btn-danger form-control-static center-block">Back to List</a>
+        </div>
 </div>

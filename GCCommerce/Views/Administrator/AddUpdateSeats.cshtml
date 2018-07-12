@@ -9,10 +9,17 @@
     IList<Program> ILP = ViewBag.vb;
 
 }
-
-<h2>AddUpdateSeats</h2>
-
-<h4>ModelSeats</h4>
+@{
+    if (Model.SeatId < 1)
+    {
+        <h2>Add Seats</h2>
+    }
+    else
+    {
+        <h2>Update Seats</h2>
+    }
+}
+<h4 hidden>ModelSeats</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="FkProgramId" class="control-label"></label>
-               @* <input asp-for="FkProgramId" class="form-control" />*@
+                @* <input asp-for="FkProgramId" class="form-control" />*@
                 @Html.DropDownListFor(model => model.FkProgramId, new SelectList(ILP, "ProgramId", "ProgramTitle"), "---Select Program", new { @class = "form-control" })
 
                 <span asp-validation-for="FkProgramId" class="text-danger"></span>
@@ -59,11 +66,11 @@
                 @{
                     if (Model.SeatId < 1)
                     {
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input type="submit" value="Update" class="btn btn-default" />
+                        <input type="submit" value="Update" class="btn btn-warning" />
 
                     }
                 }
@@ -73,7 +80,7 @@
 </div>
 
 <div>
-    <a asp-action="SeatsList">Back to List</a>
+    <a asp-action="SeatsList" class="btn btn-danger center-block">Back to List</a>
 </div>
 
 @section Scripts {

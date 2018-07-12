@@ -6,10 +6,10 @@
 
 }
 
-<h2>ShiftList</h2>
+<h2>Shift List</h2>
 
 <p>
-    <a asp-action="AddUpdateShift">Create New</a>
+    <a asp-action="AddUpdateShift" class="btn btn-primary pull-right">Create New</a>
 </p>
 <table class="table" id="table" name="table">
     <thead>
@@ -52,9 +52,9 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "UpdateShift", new { id=item.ShiftId }) |
-                @Html.ActionLink("Details", "ShiftDetail", new { ShiftID = item.ShiftId }) |
-                @Html.ActionLink("Delete", "ShiftDelete", new { ShiftID = item.ShiftId })
+                @Html.ActionLink("Edit", "UpdateShift", new { id=item.ShiftId }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "ShiftDetail", new { ShiftID = item.ShiftId }, new { @class = "btn btn-small btn-primary" }) |
+                @Html.ActionLink("Delete", "ShiftDelete", new { ShiftID = item.ShiftId }, new { @class = "btn btn-small  btn-danger" })
             </td>
         </tr>
 }
@@ -64,7 +64,6 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable();
-
         });
         </script>
 

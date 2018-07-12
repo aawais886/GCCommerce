@@ -6,10 +6,10 @@
 
 }
 
-<h2>EventDetail</h2>
+<h2>Event Detail</h2>
 
 <div>
-    <h4>Event</h4>
+    <h4 hidden>Event</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -50,7 +50,11 @@
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "UpdateEvent", new { id = Model.EventId }) |
-    <a asp-action="EventList">Back to List</a>
+<div class="col-md-8">
+    <div class="col-md-4">
+        @Html.ActionLink("Edit", "UpdateEvent", new { id = Model.EventId }, new { @class = "btn btn-success center-block" })
+    </div>
+    <div class="col-md-4">
+        <a asp-action="EventList" class="btn btn-danger center-block">Back to List</a>
+    </div>
 </div>

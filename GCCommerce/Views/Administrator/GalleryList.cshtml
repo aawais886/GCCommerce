@@ -6,10 +6,10 @@
 
 }
 
-<h2>GalleryList</h2>
+<h2>Gallery List</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AddUpdateGllery" class="btn btn-primary pull-right">Create New</a>
 </p>
 <table class="table" id="table" name="table">
     <thead>
@@ -58,9 +58,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }) |
-                    @Html.ActionLink("Details", "GalleryDetail", new {GalleryID =item.GalleryId}) |
-                    @Html.ActionLink("Delete", "GalleryDelete", new { GalleryID=item.GalleryId })
+                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "GalleryDetail", new {GalleryID =item.GalleryId}, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "GalleryDelete", new { GalleryID=item.GalleryId }, new { @class = "btn btn-small  btn-danger" })
                 </td>
             </tr>
         }

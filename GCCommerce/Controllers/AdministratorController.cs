@@ -175,7 +175,7 @@ namespace GCCommerce.Controllers
             {
                 TempData["action"] = Constants.FAILED;
             }
-            return RedirectToAction(nameof(AdministratorController.NewsList));
+            return RedirectToAction(nameof(AdministratorController.EventList));
         }
         public IActionResult EventList()
         {
@@ -578,6 +578,16 @@ namespace GCCommerce.Controllers
             ViewBag.vb = ILS;
             return View("AddUpdateProgram", CopyPToMP(P));
         }
+        //[HttpPut]
+        //public JsonResult CheckDuplicate(string ProgramTitle)
+        //{
+        //    bool duplicate = false;
+        //    if(OurdbContext.Program.Where(abc => abc.ProgramTitle.Contains(ProgramTitle)).Count() > 0 )
+        //    {
+        //        duplicate = true;
+        //    }
+        //    return Json(duplicate == false);
+        //}
         [HttpPost]
         public IActionResult AddUpdateProgram(ModelProgram MP)
         {
@@ -669,6 +679,9 @@ namespace GCCommerce.Controllers
             ML.DateCreated = DateTime.Now;
             IList<Program> ILP = OurdbContext.Program.ToList();
             ViewBag.vb = ILP;
+            IList<Shift> ILS = OurdbContext.Shift.ToList();
+            ViewBag.vbs = ILS;
+
             return View(ML);
         }
         [HttpGet]
@@ -685,6 +698,8 @@ namespace GCCommerce.Controllers
             }
             IList<Program> ILP = OurdbContext.Program.ToList();
             ViewBag.vb = ILP;
+            IList<Shift> ILS = OurdbContext.Shift.ToList();
+            ViewBag.vbs = ILS;
             return View("AddUpdateMeritList", CopyMLToMML(ML));
         }
         [HttpPost]
@@ -718,7 +733,19 @@ namespace GCCommerce.Controllers
         }
         public IActionResult MeritListList()
         {
-                     return View(OurdbContext.MeritList.ToList());
+            IList<ModelMeritListList> obj = (from a in OurdbContext.MeritList
+                                             join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
+                                             join c in OurdbContext.Shift on a.Shift equals c.Shift1
+                                             select new ModelMeritListList
+                                             {
+                                                 ID = a.MeritListId,
+                                                 FKProgramID=b.ProgramId,
+                                                 ProgramTitle=b.ProgramTitle,
+                                                 Shift=a.Shift,
+                                                 MeritListValue=a.MeritListValue
+
+                                             }).ToList();
+                     return View(obj);
         }
 
         public IActionResult MeritListDetail(int MeritListID)
@@ -911,6 +938,10 @@ namespace GCCommerce.Controllers
             {
                 return NotFound();
             }
+            IList<Program> ILP = OurdbContext.Program.ToList();
+            ViewBag.vb = ILP;
+            IList<Shift> ILS = OurdbContext.Shift.ToList();
+            ViewBag.vbs = ILS;
             return View("AddUpdateFeeStructure", CopyFSToMFS(FS));
 
         }
@@ -946,11 +977,13 @@ namespace GCCommerce.Controllers
         public IActionResult FeeStructureList()
         {
             IList<ModelFeeStructureList> obj = (from a in OurdbContext.FeeStructure
-                                                join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId                                                select new ModelFeeStructureList
+                                                join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
+                                                join c in OurdbContext.Shift on b.FkShiftId equals c.ShiftId
+                                                select new ModelFeeStructureList
                                                 {
                                                     Id =a.Id,
-                                                    ProgramTitle =b.ProgramTitle, 
-                                                    Shift=a.Shift,
+                                                    ProgramTitle = b.ProgramTitle, 
+                                                    Shift=c.Shift1,
                                                     Year1=a.Year1,
                                                     Year2=a.Year2
                                                 }).ToList();
@@ -962,7 +995,6 @@ namespace GCCommerce.Controllers
             FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc. Id == FeeStructureID).FirstOrDefault<FeeStructure>();
             return View(obj);
         }
-        [HttpDelete]
         public IActionResult FeeStructureDelete(int FeeStructureID)
         {
             FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc.Id == FeeStructureID).FirstOrDefault<FeeStructure>();

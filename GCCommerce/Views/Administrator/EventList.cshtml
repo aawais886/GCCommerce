@@ -6,10 +6,10 @@
 
 }
 
-<h2>EventList</h2>
+<h2>Event List</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AddUpdateEvent" class="btn btn-primary pull-right">Create New</a>
 </p>
 <table class="table" id="table" name="table">
     <thead>
@@ -66,9 +66,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateEvent", new { id = item.EventId }) |
-                    @Html.ActionLink("Details", "EventDetail", new { id = item.EventId }) |
-                    @Html.ActionLink("Delete", "EventDelete", new { id=item.EventId })
+                    @Html.ActionLink("Edit", "UpdateEvent", new { id = item.EventId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "EventDetail", new { EventID = item.EventId }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "EventDelete", new { EventID = item.EventId }, new { @class = "btn btn-small  btn-danger" })
                 </td>
             </tr>
         }

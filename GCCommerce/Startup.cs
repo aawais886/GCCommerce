@@ -66,7 +66,7 @@ namespace GCCommerce
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=DashBoard}/{action=DashBoard}/{id?}");
+                    template: "{controller=Administrator}/{action=AddUpdateMeritList}/{id?}");
             });
         }
     }

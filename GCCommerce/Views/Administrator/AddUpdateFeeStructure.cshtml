@@ -9,10 +9,18 @@
     IList<Program> ILP = ViewBag.vb;
     IList<Shift> ILS = ViewBag.vbs;
 }
+  @{ 
+     if (Model.Id < 1)
+     {
+          <h2>New Fee Structure</h2>
+     }
+     else
+     {
+           <h2>Update Fee Structure</h2>
 
-<h2>AddUpdateFeeStructure</h2>
-
-<h4>ModelFeeStructure</h4>
+     }
+     }
+<h4 hidden>ModelFeeStructure</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Shift" class="control-label"></label>
-               @* <input asp-for="Shift" class="form-control" />*@
+                @* <input asp-for="Shift" class="form-control" />*@
                 @Html.DropDownListFor(model => model.Shift, new SelectList(ILS, "ShiftId", "Shift1"), "---Select Shift---", new { @class = "form-control" })
 
                 <span asp-validation-for="Shift" class="text-danger"></span>
@@ -58,14 +66,24 @@
                 <span asp-validation-for="DateUpdated" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @{
+                    if (Model.Id < 1)
+                    {
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Update" class="btn btn-warning" />
+
+                    }
+                }
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="FeeStructureList">Back to List</a>
+<div  class="form-control-static">
+    <a asp-action="FeeStructureList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {

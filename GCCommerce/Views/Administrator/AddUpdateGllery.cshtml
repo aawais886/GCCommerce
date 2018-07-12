@@ -5,10 +5,17 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
 }
-
-<h2>AddUpdateGllery</h2>
-
-<h4>ModelGallery</h4>
+@{
+    if (Model.GalleryId < 1)
+    {
+        <h2>Add Gllery</h2>
+    }
+    else
+    {
+        <h2>Update Gllery</h2>
+    }
+}
+<h4 hidden>ModelGallery</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -45,21 +52,23 @@
                         if (Model.GalleryId < 1)
                         {
 
-                            <input type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Create" class="btn btn-primary" />
                         }
                         else
                         {
-                            <input type="submit" value="Update" class="btn btn-default" />
+                            <input type="submit" value="Update" class="btn btn-warning" />
 
                         }
                     }
                 </div>
-</form>
+            </div>
+
+        </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div  class="form-control-static">
+    <a asp-action="GalleryList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {

@@ -6,10 +6,10 @@
 
 }
 
-<h2>FeeStructureList</h2>
+<h2>Fee Structure List</h2>
 
 <p>
-    <a asp-action="AddUpdateFeeStructure">Create New</a>
+    <a asp-action="AddUpdateFeeStructure" class="btn btn-primary pull-right">Create New</a>
 </p>
 <table class="table" id="table" name="table">
     <thead>
@@ -17,7 +17,7 @@
             <th hidden>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th hidden>
                 @Html.DisplayNameFor(model => model.FkProgramId)
             </th>
             <th>
@@ -48,11 +48,11 @@
             <td hidden>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
+            <td hidden>
                 @Html.DisplayFor(modelItem => item.FkProgramId)
             </td>
             <th>
-                @Html.DisplayNameFor(model => model.ProgramTitle)
+                @Html.DisplayFor(model => item.ProgramTitle)
             </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Shift)
@@ -77,9 +77,9 @@
             }
         </td>*@
             <td>
-                @Html.ActionLink("Edit", "UpdateFeeStructure", new { id = item.Id }) |
-                @Html.ActionLink("Details", "FeeStructureDetail", new { FeeStructureID = item.Id }) |
-                @Html.ActionLink("Delete", "FeeStructureDelete", new { FeeStructureID = item.Id })
+                @Html.ActionLink("Edit", "UpdateFeeStructure", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "FeeStructureDetail", new { FeeStructureID = item.Id }, new { @class = "btn btn-small btn-primary" }) |
+                @Html.ActionLink("Delete", "FeeStructureDelete", new { FeeStructureID = item.Id }, new { @class = "btn btn-small  btn-danger" })
             </td>
         </tr>
         }

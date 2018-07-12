@@ -10,9 +10,11 @@ namespace GCCommerce.Models
     {
         [Key]
         public int MeritListId { get; set; }
-
+        [Required]
+        [Display(Name ="Select Program")]
         public int FkProgramId { get; set; }
-         [Required(ErrorMessage = "Select Shift")]
+        [Required(ErrorMessage = "Select Shift")]
+        [Display(Name ="Select Shift")]
         public string Shift { get; set; }
 
         [Required (ErrorMessage ="Enter MeritList Value")]

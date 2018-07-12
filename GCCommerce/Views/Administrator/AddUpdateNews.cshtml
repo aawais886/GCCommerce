@@ -6,9 +6,17 @@
 
 }
 
-<h2>AddUpdateNews</h2>
-
-<h4>ModelNews</h4>
+@{
+    if (Model.NewsId < 1)
+    {
+        <h2>Add News</h2>
+    }
+    else
+    {
+        <h2>Update News</h2>
+    }
+}
+<h4 hidden>ModelNews</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -39,11 +47,11 @@
                     if (Model.NewsId < 1)
                     {
 
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input type="submit" value="Update" class="btn btn-default" />
+                        <input type="submit" value="Update" class="btn btn-warning" />
 
                     }
                 }
@@ -53,8 +61,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="NewsList">Back to List</a>
+<div class="form-control-static">
+    <a asp-action="NewsList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {

@@ -4,23 +4,25 @@
 @using GCCommerce.Entities;
 
 @{
-    if(Model.AdmissionId<1)
+
+    ViewData["Title"] = "AddUpdateAdmission";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    IList<Program>
+    ILP = ViewBag.vb;
+}
+
+@{
+    if (Model.AdmissionId < 1)
     {
-        ViewData["Title"] = "AddUpdateAdmission";
+       <h2 class="center-block">Add New Admission</h2>
     }
     else
     {
-        ViewData["Title"] = "AddUpdateAdmission";
-
-
+        <h2 class="center-block">Update Admission</h2>
     }
-
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    IList <Program> ILP = ViewBag.vb;
 }
-<h2>AddUpdateAdmission</h2>
 
-<h4>ModelAdmission</h4>
+<h4 hidden>ModelAdmission</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -61,11 +63,11 @@
                 @{
                     if (Model.AdmissionId < 1)
                     {
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-primary"  />
                     }
                     else
                     {
-                        <input type="submit" value="Update" class="btn btn-default" />
+                        <input type="submit" value="Update" class="btn btn-warning" />
 
                     }
                 }
@@ -74,8 +76,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="AdmissionList">Back to List</a>
+<div class="form-control-static">
+    <a asp-action="AdmissionList" class="btn btn-danger form-control-static center-block">Back to List</a>
 </div>
 
 @section Scripts {
