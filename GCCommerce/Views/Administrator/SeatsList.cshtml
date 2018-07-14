@@ -8,53 +8,62 @@
 <h2>Seats List</h2>
 
 <p>
-    <a asp-action="AddUpdateSeats"  class="btn btn-primary pull-right">Create New</a>
+    <a asp-action="AddUpdateSeats" class="btn btn-primary pull-right">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="table" name="table">
     <thead>
         <tr>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProgramTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalSeats)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AvailAbleSeats)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ReserveSeats)
-                </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailAbleSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReserveSeats)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td hidden>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalSeats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AvailAbleSeats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReserveSeats)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateSeats", new {  id=item.Id }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Details", "SeatsDetail", new { SeatsID = item.Id}, new { @class = "btn btn-small btn-primary" }) |
-                @Html.ActionLink("Delete", "SeatsDelete", new { SeatsID= item.Id }, new { @class = "btn btn-small  btn-danger" })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvailAbleSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReserveSeats)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateSeats", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "SeatsDetail", new { SeatsID = item.Id }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "SeatsDelete", new { SeatsID = item.Id }, new { @class = "btn btn-small  btn-danger" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+        });
+    </script>
+}

@@ -3,18 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+
+
     <title>@ViewData["Title"] - GCCommerce</title>
 
     <environment include="Development">
         @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
-            <link href="~/lib/DataTable/jquery.dataTables.min.css" rel="stylesheet" />*@
-
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-        SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <link rel="stylesheet" href="~/css/site.css" />*@
         <!-- Bootstrap Core CSS -->
         <link href="~/admin/css/bootstrap.css" rel="stylesheet" />
         <!-- Custom CSS -->
@@ -24,467 +26,460 @@
         <link href="~/admin/css/font-awesome.css" rel="stylesheet" />
         <!-- //font-awesome icons -->
         <!--webfonts-->
-        <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css' />
-        <!--//webfonts-->
+        <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
         <!--animate-->
-        <link href="~/admin/css/animate.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="~/admin/css/animate.css" rel="stylesheet" />
         <!--//end-animate-->
         <!-- Metis Menu -->
         <link href="~/admin/css/custom.css" rel="stylesheet" />
         <!--//Metis Menu -->
-
-
+        <link href="~/lib/DataTable/jquery.dataTables.min.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        @*<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
-        <link rel="stylesheet" href="~/admin/css/style.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body class="cbp-spmenu-push">
-    <div class="main-content">
-        <!--left-fixed -navigation-->
-        <div class=" sidebar" role="navigation">
-            <div class="navbar-collapse">
-                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="/DashBoard/DashBoard" class="active"><i class="fa fa-home nav_icon"></i>Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Admission<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Admission</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Admission List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Events<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateEvent">Add Update Event</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/EventList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Fee Structure<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Gallery<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Merit List<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>News<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Program<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Seats<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Shift<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Teacher<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse in">
-                                <li>
-                                    <a href="/Administrator/AddUpdateAdmission">Add Update Events</a>
-                                </li>
-                                <li>
-                                    <a href="/Administrator/AdmissionList">Events List</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-                        @*<li>
-                                <a href="widgets.html"><i class="fa fa-th-large nav_icon"></i>Widgets <span class="nav-badge-btm">08</span></a>
-                            </li>*@
-                        <li>
-                            <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages<span class="nav-badge-btm">02</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="signup.html">SignUp</a>
-                                </li>
-                                <li>
-                                    <a href="blank-page.html">Blank Page</a>
-                                </li>
-                            </ul>
-                            <!-- //nav-second-level -->
-                        </li>
-
-                    </ul>
-                    <!-- //sidebar-collapse -->
-                </nav>
-            </div>
+<body>
+    <!--left-fixed -navigation-->
+    <div class=" sidebar" role="navigation">
+        <div class="navbar-collapse">
+            <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="/DashBoard/DashBoard"><i class="fa fa-home nav_icon"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Admission<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateAdmission">Add Admission</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/AdmissionList">Admission List</a>
+                            </li>
+                        </ul>
+                        <!-- /nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Events<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateEvent">Add Event</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/EventList">Events List</a>
+                            </li>
+                        </ul>
+                        <!-- /nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Fee Structure<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateFeeStructure">Add Fee Structure</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/FeeStructureList">Fee Structure</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Gallery<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateGllery">Add Gallery</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/GalleryList">Gallery List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Merit List<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateMeritList">Add Merit List</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/MeritListList">Merit List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>News<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateNews">Add News</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/NewsList">News List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Program<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateProgram">Add Program</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/ProgramList">Program List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Seats<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateSeats">Add Seats</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/SeatsList">Seats List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Shift<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateShift">Add Shift</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/ShiftList">Shift List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Teacher<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="/Administrator/AddUpdateTeacher">Add Teacher</a>
+                            </li>
+                            <li>
+                                <a href="/Administrator/TeacherList">Teacher List</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages<span class="nav-badge-btm">02</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="login.html">Login</a>
+                            </li>
+                            <li>
+                                <a href="signup.html">SignUp</a>
+                            </li>
+                            <li>
+                                <a href="blank-page.html">Blank Page</a>
+                            </li>
+                        </ul>
+                        <!-- //nav-second-level -->
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+                <!-- //sidebar-collapse -->
+            </nav>
         </div>
-        <!--left-fixed -navigation-->
-        <!-- header-starts -->
-        <div class="sticky-header header-section ">
-            <div class="header-left">
-                <!--toggle button start-->
-                <button id="showLeftPush"><i class="fa fa-bars"></i></button>
-                <!--toggle button end-->
-                <!--logo -->
-                <div class="logo">
-                    <a href="/DashBoard/DashBoard">
-                        <h1>NOVUS</h1>
-                        <span>AdminPanel</span>
-                    </a>
-                </div>
-                <!--//logo-->
-                <!--search-box-->
-                <div class="search-box">
-                    <form class="input">
-                        <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
-                        <label class="input__label" for="input-31">
-                            <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-                                <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
-                            </svg>
-                        </label>
-                    </form>
-                </div><!--//end-search-box-->
+    </div>
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    <div class="sticky-header header-section ">
+        <div class="header-left">
+            <!--toggle button start-->
+            <button id="showLeftPush"><i class="fa fa-bars"></i></button>
+            <!--toggle button end-->
+            <!--logo -->
+            <div class="logo">
+                <a href="/DashBoard/DashBoard">
+                    <h1>NOVUS</h1>
+                    <span>AdminPanel</span>
+                </a>
+            </div>
+            <!--//logo-->
+            <!--search-box-->
+            <div class="search-box">
+                <form class="input">
+                    <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+                    <label class="input__label" for="input-31">
+                        <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                            <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
+                        </svg>
+                    </label>
+                </form>
+            </div><!--//end-search-box-->
+            <div class="clearfix"> </div>
+        </div>
+        <div class="header-right">
+            <div class="profile_details_left">
+                <!--notifications of menu start -->
+                <ul class="nofitications-dropdown">
+                    <li class="dropdown head-dpdn">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="notification_header">
+                                    <h3>You have 3 new messages</h3>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="user_img"><img src="images/1.png" alt=""></div>
+                                    <div class="notification_desc">
+                                        <p>Lorem ipsum dolor amet</p>
+                                        <p><span>1 hour ago</span></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li class="odd">
+                                <a href="#">
+                                    <div class="user_img"><img src="images/2.png" alt=""></div>
+                                    <div class="notification_desc">
+                                        <p>Lorem ipsum dolor amet </p>
+                                        <p><span>1 hour ago</span></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="user_img"><img src="images/3.png" alt=""></div>
+                                    <div class="notification_desc">
+                                        <p>Lorem ipsum dolor amet </p>
+                                        <p><span>1 hour ago</span></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="notification_bottom">
+                                    <a href="#">See all messages</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown head-dpdn">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="notification_header">
+                                    <h3>You have 3 new notification</h3>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="user_img"><img src="images/2.png" alt=""></div>
+                                    <div class="notification_desc">
+                                        <p>Lorem ipsum dolor amet</p>
+                                        <p><span>1 hour ago</span></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li class="odd">
+                                <a href="#">
+                                    <div class="user_img"><img src="images/1.png" alt=""></div>
+                                    <div class="notification_desc">
+                                        <p>Lorem ipsum dolor amet </p>
+                                        <p><span>1 hour ago</span></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="user_img"><img src="images/3.png" alt=""></div>
+                                    <div class="notification_desc">
+                                        <p>Lorem ipsum dolor amet </p>
+                                        <p><span>1 hour ago</span></p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="notification_bottom">
+                                    <a href="#">See all notifications</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown head-dpdn">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">15</span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="notification_header">
+                                    <h3>You have 8 pending task</h3>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <span class="task-desc">Database update</span><span class="percentage">40%</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="progress progress-striped active">
+                                        <div class="bar yellow" style="width:40%;"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="progress progress-striped active">
+                                        <div class="bar green" style="width:90%;"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <span class="task-desc">Mobile App</span><span class="percentage">33%</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="progress progress-striped active">
+                                        <div class="bar red" style="width: 33%;"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="task-info">
+                                        <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="progress progress-striped active">
+                                        <div class="bar  blue" style="width: 80%;"></div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="notification_bottom">
+                                    <a href="#">See all pending tasks</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
                 <div class="clearfix"> </div>
             </div>
-            <div class="header-right">
-                <div class="profile_details_left">
-                    <!--notifications of menu start -->
-                    <ul class="nofitications-dropdown">
-                        <li class="dropdown head-dpdn">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="notification_header">
-                                        <h3>You have 3 new messages</h3>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="user_img"><img src="~/admin/images/1.png" alt="" /></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
-                                </li>
-                                <li class="odd">
-                                    <a href="#">
-                                        <div class="user_img"><img src="~/admin/images/2.png" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="user_img">
-
-                                            <img src="~/admin/images/3.png" alt="" />
-
-                                        </div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="notification_bottom">
-                                        <a href="#">See all messages</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown head-dpdn">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="notification_header">
-                                        <h3>You have 3 new notification</h3>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="user_img">
-                                            <img src="~/admin/images/2.png" alt="" />
-                                        </div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
-                                </li>
-                                <li class="odd">
-                                    <a href="#">
-                                        <div class="user_img"><img src="images/1.png" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="user_img"><img src="~/admin/images/3.png" alt="" /></div>
-
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="notification_bottom">
-                                        <a href="#">See all notifications</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown head-dpdn">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">15</span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="notification_header">
-                                        <h3>You have 8 pending task</h3>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Database update</span><span class="percentage">40%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar yellow" style="width:40%;"></div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Dashboard done</span><span class="percentage">90%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar green" style="width:90%;"></div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Mobile App</span><span class="percentage">33%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar red" style="width: 33%;"></div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="task-info">
-                                            <span class="task-desc">Issues fixed</span><span class="percentage">80%</span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="progress progress-striped active">
-                                            <div class="bar  blue" style="width: 80%;"></div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="notification_bottom">
-                                        <a href="#">See all pending tasks</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="clearfix"> </div>
-                </div>
-                <!--notification menu end -->
-                <div class="profile_details">
-                    <ul>
-                        <li class="dropdown profile_details_drop">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <div class="profile_img">
-                                    <span class="prfil-img"><img src="~/admin/images/a.png" alt=""> </span>
-
-                                    <div class="user-name">
-                                        <p>Wikolia</p>
-                                        <span>Administrator</span>
-                                    </div>
-                                    <i class="fa fa-angle-down lnr"></i>
-                                    <i class="fa fa-angle-up lnr"></i>
-                                    <div class="clearfix"></div>
+            <!--notification menu end -->
+            <div class="profile_details">
+                <ul>
+                    <li class="dropdown profile_details_drop">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <div class="profile_img">
+                                <span class="prfil-img"><img src="images/a.png" alt=""> </span>
+                                <div class="user-name">
+                                    <p>Wikolia</p>
+                                    <span>Administrator</span>
                                 </div>
-                            </a>
-                            <ul class="dropdown-menu drp-mnu">
-                                <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-                                <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-                                <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="clearfix"> </div>
+                                <i class="fa fa-angle-down lnr"></i>
+                                <i class="fa fa-angle-up lnr"></i>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu drp-mnu">
+                            <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
+                            <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
+                            <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <div class="clearfix"> </div>
         </div>
-        <!-- //header-ends -->
-        <div id="page-wrapper" style="min-height: 352px;">
-            <div class="mian-page">
-                @RenderBody()
-            </div>
-        </div>
-        @*<hr />
-            <footer>
-                <p pull="center">&copy; 2018 - GCCommerce</p>
-            </footer>*@
-
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-            <script src="~/lib/DataTable/jquery.dataTables.min.js"></script>
-
-            <script src="~/admin/js/jquery-1.11.1.min.js"></script>
-            <script src="~/admin/js/modernizr.custom.js"></script>
-            <script src="~/admin/js/wow.min.js"></script>
-            <script>
-                new WOW().init();
-            </script>
-            <script src="~/admin/js/jquery.nicescroll.js"></script>
-            <script src="~/admin/js/metisMenu.min.js"></script>
-            <!-- Classie -->
-            <script src="~/admin/js/classie.js"></script>
-            <script>
-                var menuLeft = document.getElementById('cbp-spmenu-s1'),
-                    showLeftPush = document.getElementById('showLeftPush'),
-                    body = document.body;
-
-                showLeftPush.onclick = function () {
-                    classie.toggle(this, 'active');
-                    classie.toggle(body, 'cbp-spmenu-push-toright');
-                    classie.toggle(menuLeft, 'cbp-spmenu-open');
-                    disableOther('showLeftPush');
-                };
-                function disableOther(button) {
-                    if (button !== 'showLeftPush') {
-                        classie.toggle(showLeftPush, 'disabled');
-                    }
-                }
-            </script>
-            <!--scrolling js-->
-            <script src="~/admin/js/jquery.nicescroll.js"></script>
-            <script src="~/admin/js/scripts.js"></script>
-            <!--//scrolling js-->
-            @*<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
-            <script src="~/admin/js/bootstrap.js"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-            </script>
-            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-            </script>
-            @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
-            <script src="~/admin/js/site.js" asp-append-version="true"></script>
-        </environment>
-
-        @RenderSection("Scripts", required: false)
+        <div class="clearfix"> </div>
     </div>
+    <!-- //header-ends -->
+    <div id="page-wrapper" style="min-height:352px;">
+        <div class="main-page">
+            @RenderBody()
+        </div>
+     </div>
+        @*<hr />
+        <footer>
+            <p>&copy; 2018 - GCCommerce</p>
+        </footer>*@
+
+    <environment include="Development">
+      @*<script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+        <!-- js-->
+        <script src="~/admin/js/jquery-1.11.1.min.js"></script>
+        <script src="~/admin/js/modernizr.custom.js"></script>
+        <!--animate-->
+        <script src="~/admin/js/wow.min.js"></script>
+        <script>
+            new WOW().init();
+        </script>
+        <!--//end-animate-->
+        <!-- Metis Menu -->
+        <script src="~/admin/js/metisMenu.min.js"></script>
+        <script src="~/admin/js/custom.js"></script>
+        <!--//Metis Menu -->
+        <!-- Classie -->
+        <script src="~/admin/js/classie.js"></script>
+        <script>
+            var menuLeft = document.getElementById('cbp-spmenu-s1'),
+                showLeftPush = document.getElementById('showLeftPush'),
+                body = document.body;
+
+            showLeftPush.onclick = function () {
+                classie.toggle(this, 'active');
+                classie.toggle(body, 'cbp-spmenu-push-toright');
+                classie.toggle(menuLeft, 'cbp-spmenu-open');
+                disableOther('showLeftPush');
+            };
+
+            function disableOther(button) {
+                if (button !== 'showLeftPush') {
+                    classie.toggle(showLeftPush, 'disabled');
+                }
+            }
+        </script>
+        <!--scrolling js-->
+
+        <script src="~/admin/js/jquery.nicescroll.js"></script>
+        <script src="~/admin/js/scripts.js"></script>
+        <!--//scrolling js-->
+        <!-- Bootstrap Core JavaScript -->
+        <script src="~/admin/js/bootstrap.js"></script>
+
+
+        <script src="~/lib/DataTable/jquery.dataTables.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -10,39 +10,49 @@
 <p>
     <a asp-action="AddUpdateProgram" class="btn btn-primary pull-right">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="table" name="table">
     <thead>
         <tr>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProgramTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProgramShift)
-                </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramShift)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td hidden>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramShift)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateProgram", new { id=item.Id }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Details", "ProgramDetail", new { ProgramID = item.Id}, new { @class = "btn btn-small btn-primary" }) |
-                @Html.ActionLink("Delete", "ProgramDelete", new { ProgramID = item.Id }, new { @class = "btn btn-small  btn-danger" })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramShift)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateProgram", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "ProgramDetail", new { ProgramID = item.Id }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "ProgramDelete", new { ProgramID = item.Id }, new { @class = "btn btn-small  btn-danger" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+        });
+    </script>
+}

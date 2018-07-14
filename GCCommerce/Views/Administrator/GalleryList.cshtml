@@ -27,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
             <th hidden>
-                    @Html.DisplayNameFor(model => model.DateUpdated)
+                @Html.DisplayNameFor(model => model.DateUpdated)
             </th>
         </tr>
     </thead>
@@ -35,7 +35,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td hidden>
                     @Html.DisplayFor(modelItem => item.GalleryId)
                 </td>
                 <td>
@@ -59,19 +59,18 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "GalleryDetail", new {GalleryID =item.GalleryId}, new { @class = "btn btn-small btn-primary" }) |
-                    @Html.ActionLink("Delete", "GalleryDelete", new { GalleryID=item.GalleryId }, new { @class = "btn btn-small  btn-danger" })
+                    @Html.ActionLink("Details", "GalleryDetail", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "GalleryDelete", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small  btn-danger" })
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
 @section scripts{
     <script>
         $(document).ready(function () {
             $('#table').DataTable();
 
-    });
+        });
     </script>
 }

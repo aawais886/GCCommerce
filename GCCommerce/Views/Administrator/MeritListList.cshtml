@@ -10,51 +10,60 @@
 <p>
     <a asp-action="AddUpdateMeritList" class="btn btn-primary pull-right">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="table" name="table">
     <thead>
         <tr>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.ID)
-                </th>
-                <th hidden>
-                    @Html.DisplayNameFor(model => model.FKProgramID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProgramTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Shift)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MeritListValue)
-                </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.FKProgramID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MeritListValue)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td hidden>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td hidden>
-                @Html.DisplayFor(modelItem => item.FKProgramID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Shift)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeritListValue)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateMeritList", new { id=item.ID }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Details", "MeritListDetail", new { MeritListID = item.ID }, new { @class = "btn btn-small btn-primary" }) |
-                @Html.ActionLink("Delete", "MeritListDelete", new { MeritListID = item.ID }, new { @class = "btn btn-small  btn-danger" })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.FKProgramID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shift)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeritListValue)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateMeritList", new { id = item.ID }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "MeritListDetail", new { MeritListID = item.ID }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "MeritListDelete", new { MeritListID = item.ID }, new { @class = "btn btn-small  btn-danger" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}

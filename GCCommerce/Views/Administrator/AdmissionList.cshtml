@@ -10,45 +10,54 @@
     <a asp-action="AddUpdateAdmission" class="btn btn-primary pull-right">Create New</a>
 </p>
 <br />
-<table class="table">
+<table class="table" id="table" name="table">
     <thead>
         <tr>
-                @*<th>
+            @*<th>
                     @Html.DisplayNameFor(model => model.ProgramID)
                 </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.ProgramTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AdmissionEligibilityCriteria)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AdmissionDocument)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionEligibilityCriteria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionDocument)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ProgramID)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdmissionEligibilityCriteria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdmissionDocument)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID } , new { @class = "btn btn-success" })|
-                @Html.ActionLink("Details", "Details", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small btn-primary" }) |
-                @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small  btn-danger" })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ProgramID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionEligibilityCriteria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdmissionDocument)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID }, new { @class = "btn btn-success" })|
+                    @Html.ActionLink("Details", "Details", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small btn-primary" }) |
+                    @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small  btn-danger" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+
+    });
+    </script>
+}
