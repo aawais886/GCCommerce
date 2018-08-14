@@ -2,11 +2,10 @@
 
 @{
     ViewData["Title"] = "EventList";
-   Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Event List</h2>
+<h2>EventList</h2>
 
 <p>
     <a asp-action="AddUpdateEvent" class="btn btn-primary pull-right">Create New</a>
@@ -66,9 +65,10 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateEvent", new { id = item.EventId }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "EventDetail", new { EventID = item.EventId }, new { @class = "btn btn-small btn-primary" }) |
-                    @Html.ActionLink("Delete", "EventDelete", new { EventID = item.EventId }, new { @class = "btn btn-small  btn-danger" })
+                    @Html.ActionLink("Edit", "UpdateEvent", new { id = item.EventId }, new { @class = "btn btn-success" }) 
+                    @Html.ActionLink("Details", "EventDetail", new { EventID = item.EventId }, new { @class = "btn btn-small btn-primary" }) 
+                    @*@Html.ActionLink("Delete", "EventDelete", new { EventID = item.EventId }, new { @class = "btn btn-small  btn-danger" })*@
+                    <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.EventId">Delete</a>
                 </td>
             </tr>
         }
@@ -79,6 +79,31 @@
         $(document).ready(function () {
             $('#table').DataTable();
 
-    });
+        });
+
+        $('.dlt').click(function () {
+            var deletbutton = $(this);
+            alert(deletbutton.data("id"));
+            if (confirm("Are You Sure you want to delete")) {
+                deletbutton.text("Please wait.....");
+                $.ajax({
+                    before: function () { },
+                    url: '/Administrator/DeleteEvent',
+                    type: 'GET',
+                    data: {
+                        id: deletbutton.data("id")
+                    },
+                    success: function (result) {
+                        alert(result);
+                        if (result == true) {
+                            deletbutton.parent().parent().fadeOut();
+                        }
+                    },
+                    error: function () { },
+                    after: function () { }
+                })
+            }
+
+        });
     </script>
-}
+    }

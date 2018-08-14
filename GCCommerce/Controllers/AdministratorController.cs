@@ -92,13 +92,35 @@ namespace GCCommerce.Controllers
             News obj = OurdbContext.News.Where(abc => abc.NewsId == NewsID).FirstOrDefault();
             return View(obj);
         }
-        public IActionResult NewsDelete(int NewsID)
+        //public IActionResult NewsDelete(int NewsID)
+        //{
+        //    News obj = OurdbContext.News.Where(abc => abc.NewsId == NewsID).FirstOrDefault<News>();
+        //    OurdbContext.News.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.NewsList));
+        //}
+        public bool DeleteNews(int Id)
         {
-            News obj = OurdbContext.News.Where(abc => abc.NewsId == NewsID).FirstOrDefault<News>();
-            OurdbContext.News.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.NewsList));
+            try
+            {
+                News N = OurdbContext.News.Find(Id);
+                if (N != null)
+                {
+                    OurdbContext.News.Remove(N);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
+
         private News CopyMNToN(ModelNews mn)
         {
             News N = new News
@@ -186,12 +208,33 @@ namespace GCCommerce.Controllers
             Event obj = OurdbContext.Event.Where(abc => abc.EventId == EventID).FirstOrDefault();
             return View(obj);
         }
-        public IActionResult EventDelete(int EventID)
+        //public IActionResult EventDelete(int EventID)
+        //{
+        //    Event obj = OurdbContext.Event.Where(abc => abc.EventId == EventID).FirstOrDefault();
+        //    OurdbContext.Event.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.EventList));
+        //}
+        public bool DeleteEvent(int Id)
         {
-            Event obj = OurdbContext.Event.Where(abc => abc.EventId == EventID).FirstOrDefault();
-            OurdbContext.Event.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.EventList));
+            try
+            {
+                Event E = OurdbContext.Event.Find(Id);
+                if (E != null)
+                {
+                    OurdbContext.Event.Remove(E);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private Event CopyMEToE(ModelEvent ME)
@@ -208,15 +251,15 @@ namespace GCCommerce.Controllers
             return E;
         }
 
-        private ModelEvent CopyEToME(Event N)
+        private ModelEvent CopyEToME(Event E)
         {
             ModelEvent ME = new ModelEvent
             {
-                EventId = N.EventId,
-                EventName = N.EventName,
-                EventDate = N.EventDate,
-                DateCreated = N.DateCreated,
-                DateUpdated = N.DateUpdated,
+                EventId = E.EventId,
+                EventName = E.EventName,
+                EventDate = E.EventDate,
+                DateCreated = E.DateCreated,
+                DateUpdated = E.DateUpdated,
 
             };
             return ME;
@@ -235,12 +278,12 @@ namespace GCCommerce.Controllers
         [HttpGet]
         public IActionResult UpdateGallery(int id)
         {
-            if(id < 1)
+            if (id < 1)
             {
                 return NotFound();
             }
             Gallery G = OurdbContext.Gallery.Find(id);
-            if(G.GalleryId < 1)
+            if (G.GalleryId < 1)
             {
                 return NotFound();
             }
@@ -280,15 +323,36 @@ namespace GCCommerce.Controllers
         }
         public IActionResult GalleryDetail(int GalleryID)
         {
-           Gallery obj =OurdbContext.Gallery.Where(abc => abc.GalleryId == GalleryID).FirstOrDefault();
+            Gallery obj = OurdbContext.Gallery.Where(abc => abc.GalleryId == GalleryID).FirstOrDefault();
             return View(obj);
         }
-        public IActionResult GalleryDelete(int GalleryID)
+        //public IActionResult GalleryDelete(int GalleryID)
+        //{
+        //    Gallery obj = OurdbContext.Gallery.Where(abc => abc.GalleryId == GalleryID).FirstOrDefault();
+        //    OurdbContext.Gallery.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.GalleryList));
+        //}
+        public bool DeleteGallery(int Id)
         {
-           Gallery obj = OurdbContext.Gallery.Where(abc => abc.GalleryId == GalleryID).FirstOrDefault();
-            OurdbContext.Gallery.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.GalleryList));
+            try
+            {
+                Gallery G = OurdbContext.Gallery.Find(Id);
+                if (G != null)
+                {
+                    OurdbContext.Gallery.Remove(G);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
         private Gallery CopyMGToG(ModelGallery MG)
         {
@@ -330,13 +394,13 @@ namespace GCCommerce.Controllers
         }
         [HttpGet]
         public IActionResult UpdateTeacher(int id)
-        { 
-            if(id < 1 )
+        {
+            if (id < 1)
             {
                 return NotFound();
             }
             Teacher T = OurdbContext.Teacher.Find(id);
-            if(T.TeacherId < 1)
+            if (T.TeacherId < 1)
             {
                 return NotFound();
             }
@@ -345,7 +409,7 @@ namespace GCCommerce.Controllers
         [HttpPost]
         public IActionResult AddUpdateTeacher(ModelTeacher MT, ICollection<IFormFile> images)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 TempData["Action"] = Constants.FAILED;
                 return View(MT);
@@ -359,7 +423,7 @@ namespace GCCommerce.Controllers
 
                 string FileName = file.FileName;
                 long FileLength = file.Length;
-               
+
                 string FileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileName);
                 Random r = new Random();
 
@@ -371,7 +435,7 @@ namespace GCCommerce.Controllers
                 fs.Close();
                 fs.Dispose();
 
-               MT.Image = ImageFolderPath + FileNameWithoutExtension + Extension;
+                MT.Image = ImageFolderPath + FileNameWithoutExtension + Extension;
             }
             try
             {
@@ -387,7 +451,7 @@ namespace GCCommerce.Controllers
                     OurdbContext.SaveChanges();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 TempData["action"] = Constants.FAILED;
             }
@@ -400,15 +464,36 @@ namespace GCCommerce.Controllers
         }
         public IActionResult TeacherDetail(int TeacherID)
         {
-            Teacher obj =OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
+            Teacher obj = OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
             return View(obj);
         }
-        public IActionResult TeacherDelete(int TeacherID)
+        //public IActionResult TeacherDelete(int TeacherID)
+        //{
+        //    Teacher obj = OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
+        //    OurdbContext.Teacher.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.TeacherList));
+        //}
+        public bool DeleteTeacher(int Id)
         {
-           Teacher obj = OurdbContext.Teacher.Where(abc => abc.TeacherId == TeacherID).FirstOrDefault();
-            OurdbContext.Teacher.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.TeacherList));
+            try
+            {
+                Teacher T = OurdbContext.Teacher.Find(Id);
+                if (T != null)
+                {
+                    OurdbContext.Teacher.Remove(T);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private Teacher CopyMTToT(ModelTeacher MT)
@@ -424,7 +509,7 @@ namespace GCCommerce.Controllers
                 HiredDate = MT.HiredDate,
                 TransferDate = MT.TransferDate,
                 RetirementDate = MT.RetirementDate,
-                Image =MT.Image,
+                Image = MT.Image,
                 DateCreated = MT.DateCreated,
                 DateUpdated = MT.DateUpdated,
 
@@ -479,7 +564,7 @@ namespace GCCommerce.Controllers
         [HttpPost]
         public IActionResult AddUpdateShift(ModelShift MSobj)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 TempData["Action"] = Constants.FAILED;
                 return View(MSobj);
@@ -487,7 +572,7 @@ namespace GCCommerce.Controllers
 
             try
             {
-                if(MSobj.ShiftId > 0)
+                if (MSobj.ShiftId > 0)
                 {
                     MSobj.DateUpdated = DateTime.Now;
                     OurdbContext.Shift.Update(CopyMShiftToShift(MSobj));
@@ -499,7 +584,7 @@ namespace GCCommerce.Controllers
                     OurdbContext.SaveChanges();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 TempData["Action"] = Constants.FAILED;
             }
@@ -516,20 +601,43 @@ namespace GCCommerce.Controllers
             return View(obj);
         }
 
-        public IActionResult ShiftDelete(int ShiftID)
+        //public IActionResult ShiftDelete(int ShiftID)
+        //{
+        //    Shift obj = OurdbContext.Shift.Where(abc => abc.ShiftId == ShiftID).FirstOrDefault();
+        //    OurdbContext.Shift.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.ShiftList));
+        //}
+
+        public bool DeleteShift(int id)
         {
-            Shift obj = OurdbContext.Shift.Where(abc => abc.ShiftId==ShiftID).FirstOrDefault();
-            OurdbContext.Shift.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.ShiftList));
+            try
+            {
+                Shift  S = OurdbContext.Shift.Find(id);
+                if (S != null)
+                {
+                    OurdbContext.Shift.Remove(S);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
+
 
         private Shift CopyMShiftToShift(ModelShift MS)
         {
             Shift S = new Shift
             {
                 ShiftId = MS.ShiftId,
-                Shift1=MS.Shift1,
+                Shift1 = MS.Shift1,
                 DateCreated = MS.DateCreated,
                 DateUpdated = MS.DateUpdated,
 
@@ -578,16 +686,16 @@ namespace GCCommerce.Controllers
             ViewBag.vb = ILS;
             return View("AddUpdateProgram", CopyPToMP(P));
         }
-        //[HttpPut]
-        //public JsonResult CheckDuplicate(string ProgramTitle)
-        //{
-        //    bool duplicate = false;
-        //    if(OurdbContext.Program.Where(abc => abc.ProgramTitle.Contains(ProgramTitle)).Count() > 0 )
-        //    {
-        //        duplicate = true;
-        //    }
-        //    return Json(duplicate == false);
-        //}
+        [HttpPost]
+        public JsonResult CheckDuplicate(string ProgramTitle)
+       {
+            bool duplicate = false;
+            if (OurdbContext.Program.Where(abc => abc.ProgramTitle.Contains(ProgramTitle)).Count() > 0)
+            {
+                duplicate = true;
+            }
+            return Json(duplicate == false);
+        }
         [HttpPost]
         public IActionResult AddUpdateProgram(ModelProgram MP)
         {
@@ -599,11 +707,11 @@ namespace GCCommerce.Controllers
 
             try
             {
-                if(MP.ProgramId > 0)
+                if (MP.ProgramId > 0)
                 {
                     MP.DateUpdated = DateTime.Now;
                     OurdbContext.Program.Update(CopyMPToP(MP));
-                    OurdbContext.SaveChanges();                    
+                    OurdbContext.SaveChanges();
                 }
                 else
                 {
@@ -617,14 +725,14 @@ namespace GCCommerce.Controllers
             }
 
             return RedirectToAction(nameof(AdministratorController.ProgramList));
-        }     
+        }
         public IActionResult ProgramList()
         {
             IList<ModelProgramList> obj = (from a in OurdbContext.Program
                                            join b in OurdbContext.Shift on a.FkShiftId equals b.ShiftId
                                            select new ModelProgramList
                                            {
-                                               Id =a.ProgramId,
+                                               Id = a.ProgramId,
                                                ProgramShift = b.Shift1,
                                                ProgramTitle = a.ProgramTitle
                                            }).ToList();
@@ -633,25 +741,47 @@ namespace GCCommerce.Controllers
         }
         public IActionResult ProgramDetail(int ProgramID)
         {
-           Entities.Program P = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
+            Entities.Program P = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
             return View(P);
         }
-        public IActionResult ProgramDelete(int ProgramID)
+        //public IActionResult ProgramDelete(int ProgramID)
+        //{
+        //    Program obj = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
+        //    OurdbContext.Program.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.ProgramList));
+        //}
+        public bool DeleteProgram(int Id)
         {
-            Program obj = OurdbContext.Program.Where(abc => abc.ProgramId == ProgramID).FirstOrDefault();
-            OurdbContext.Program.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.ProgramList));
+            try
+            {
+                Program P = OurdbContext.Program.Find(Id);
+                if (P != null)
+                {
+                    OurdbContext.Program.Remove(P);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
+
         private Program CopyMPToP(ModelProgram MP)
         {
             Entities.Program P = new Entities.Program
             {
-              ProgramId=MP.ProgramId,
-              FkShiftId=MP.FkShiftId,
-              ProgramTitle=MP.ProgramTitle,
-              DateCreated=MP.DateCreated,
-              DateUpdated=MP.DateUpdated,
+                ProgramId = MP.ProgramId,
+                FkShiftId = MP.FkShiftId,
+                ProgramTitle = MP.ProgramTitle,
+                DateCreated = MP.DateCreated,
+                DateUpdated = MP.DateUpdated,
             };
             return P;
         }
@@ -739,30 +869,50 @@ namespace GCCommerce.Controllers
                                              select new ModelMeritListList
                                              {
                                                  ID = a.MeritListId,
-                                                 FKProgramID=b.ProgramId,
-                                                 ProgramTitle=b.ProgramTitle,
-                                                 Shift=a.Shift,
-                                                 MeritListValue=a.MeritListValue
+                                                 FKProgramID = b.ProgramId,
+                                                 ProgramTitle = b.ProgramTitle,
+                                                 Shift = a.Shift,
+                                                 MeritListValue = a.MeritListValue
 
                                              }).ToList();
-                     return View(obj);
+            return View(obj);
         }
 
         public IActionResult MeritListDetail(int MeritListID)
         {
-           //MeritList ML = OurdbContext.MeritList.Where(abc => abc.MeritListId == MeritListID).FirstOrDefault();
+            //MeritList ML = OurdbContext.MeritList.Where(abc => abc.MeritListId == MeritListID).FirstOrDefault();
             MeritList ML = OurdbContext.MeritList.Find(MeritListID);
-            return View(ML);            
+            return View(ML);
         }
 
-        public IActionResult MeritListDelete(int MeritListID)
+        //public IActionResult MeritListDelete(int MeritListID)
+        //{
+        //    MeritList ML = OurdbContext.MeritList.Find(MeritListID);
+        //    OurdbContext.MeritList.Remove(ML);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.MeritListList));
+        //}
+        public bool DeleteMeritList(int Id)
         {
-            MeritList ML = OurdbContext.MeritList.Find(MeritListID);
-            OurdbContext.MeritList.Remove(ML);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.MeritListList));
+            try
+            {
+                MeritList ML = OurdbContext.MeritList.Find(Id);
+                if (ML != null)
+                {
+                    OurdbContext.MeritList.Remove(ML);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
-
         private MeritList CopyMMLToML(ModelMeritList MML)
         {
             MeritList ml = new MeritList();
@@ -804,7 +954,7 @@ namespace GCCommerce.Controllers
             ma.DateCreated = DateTime.Now;
             IList<Program> ILP = OurdbContext.Program.ToList();
             ViewBag.vb = ILP;
-             return View(ma);
+            return View(ma);
         }
         [HttpGet]
         public IActionResult UpdateAdmission(int id)
@@ -855,15 +1005,15 @@ namespace GCCommerce.Controllers
         public IActionResult AdmissionList()
         {
             IList<ModelAdmissionList> obj = (from a in OurdbContext.Admission
-                                    join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
-                                    select new ModelAdmissionList
-                                    {
-                                        AdmissonID = a.AdmissionId,
-                                        ProgramTitle = b.ProgramTitle,
-                                        AdmissionEligibilityCriteria = a.AdmissionEligibilityCriteria,
-                                        AdmissionDocument = a.AdmissionDocument
+                                             join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
+                                             select new ModelAdmissionList
+                                             {
+                                                 AdmissonID = a.AdmissionId,
+                                                 ProgramTitle = b.ProgramTitle,
+                                                 AdmissionEligibilityCriteria = a.AdmissionEligibilityCriteria,
+                                                 AdmissionDocument = a.AdmissionDocument
 
-                                    }).ToList();
+                                             }).ToList();
             return View(obj);
         }
 
@@ -872,23 +1022,62 @@ namespace GCCommerce.Controllers
             Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
             return View(obj);
         }
-        
-        public IActionResult AdmissionDelete(int AdmissionID)
+
+        //public IActionResult AdmissionDelete(int AdmissionID)
+        //{
+        //    Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
+        //    //Admission obj1 = OurdbContext.Admission.Find(AdmissionID);
+        //    OurdbContext.Admission.Remove(obj);
+        //    OurdbContext.SaveChanges();
+
+        //    return RedirectToAction(nameof(AdministratorController.AdmissionList));
+        //}
+        public bool DeleteAdmission(int Id)
         {
-            Admission obj = OurdbContext.Admission.Where(abc => abc.AdmissionId == AdmissionID).FirstOrDefault<Admission>();
-            //Admission obj1 = OurdbContext.Admission.Find(AdmissionID);
-            OurdbContext.Admission.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.AdmissionList));
+            try
+            {
+                Admission Ad = OurdbContext.Admission.Find(Id);
+                if (Ad != null)
+                {
+                    OurdbContext.Admission.Remove(Ad);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }           
         }
+
+        //public string DeleteStudentAjax(Student S)
+        //{
+        //    System.Threading.Thread.Sleep(7000);
+        //    // Student S = OurDBContext.Student.Where(abc => abc.Id == StudentID).FirstOrDefault<Student>();
+        //    try
+        //    {
+        //        OurDBContext.Student.Remove(S);
+        //        OurDBContext.SaveChanges();
+        //    }
+        //    catch
+        //    {
+        //        return "0";
+        //    }
+        //    return "1";
+        //}
+
         private Admission CopyMAToA(ModelAdmission ma)
         {
             Admission A = new Admission
             {
                 AdmissionId = ma.AdmissionId,
                 FkProgramId = ma.FkProgramId,
-                AdmissionEligibilityCriteria=ma.AdmissionEligibilityCriteria,
-                AdmissionDocument=ma.AdmissionDocument,
+                AdmissionEligibilityCriteria = ma.AdmissionEligibilityCriteria,
+                AdmissionDocument = ma.AdmissionDocument,
                 DateCreated = ma.DateCreated,
                 DateUpdated = ma.DateUpdated,
 
@@ -919,11 +1108,11 @@ namespace GCCommerce.Controllers
         {
             ModelFeeStructure MFS = new ModelFeeStructure();
             MFS.DateCreated = DateTime.Now.Date;
-            IList<Program> ILP = OurdbContext.Program.ToList();           
+            IList<Program> ILP = OurdbContext.Program.ToList();
             ViewBag.vb = ILP;
             IList<Shift> ILS = OurdbContext.Shift.ToList();
             ViewBag.vbs = ILS;
-          
+
             return View(MFS);
         }
         [HttpGet]
@@ -981,36 +1170,60 @@ namespace GCCommerce.Controllers
                                                 join c in OurdbContext.Shift on b.FkShiftId equals c.ShiftId
                                                 select new ModelFeeStructureList
                                                 {
-                                                    Id =a.Id,
-                                                    ProgramTitle = b.ProgramTitle, 
-                                                    Shift=c.Shift1,
-                                                    Year1=a.Year1,
-                                                    Year2=a.Year2
+                                                    Id = a.Id,
+                                                    ProgramTitle = b.ProgramTitle,
+                                                    Shift = c.Shift1,
+                                                    Year1 = a.Year1,
+                                                    Year2 = a.Year2
                                                 }).ToList();
             return View(obj);
         }
 
         public IActionResult FeeStructureDetail(int FeeStructureID)
         {
-            FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc. Id == FeeStructureID).FirstOrDefault<FeeStructure>();
+            FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc.Id == FeeStructureID).FirstOrDefault<FeeStructure>();
             return View(obj);
         }
-        public IActionResult FeeStructureDelete(int FeeStructureID)
+
+        //public IActionResult FeeStructureDelete(int FeeStructureID)
+        //{
+        //    FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc.Id == FeeStructureID).FirstOrDefault<FeeStructure>();
+        //    OurdbContext.FeeStructure.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.FeeStructureList));
+        //}
+
+        public bool DeleteFeeStructure(int Id)
         {
-            FeeStructure obj = OurdbContext.FeeStructure.Where(abc => abc.Id == FeeStructureID).FirstOrDefault<FeeStructure>();
-            OurdbContext.FeeStructure.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.FeeStructureList));
+            try
+            {
+                FeeStructure FS = OurdbContext.FeeStructure.Find(Id);
+                if (FS != null)
+                {
+                    OurdbContext.FeeStructure.Remove(FS);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
+
         private FeeStructure CopyMFSToFS(ModelFeeStructure MFS)
         {
-             FeeStructure FS = new FeeStructure
+            FeeStructure FS = new FeeStructure
             {
                 Id = MFS.Id,
                 FkProgramId = MFS.FkProgramId,
                 Shift = MFS.Shift,
                 Year1 = MFS.Year1,
-                Year2=MFS.Year2,
+                Year2 = MFS.Year2,
                 DateCreated = MFS.DateCreated,
                 DateUpdated = MFS.DateUpdated,
             };
@@ -1097,14 +1310,14 @@ namespace GCCommerce.Controllers
                                          join b in OurdbContext.Program on a.FkProgramId equals b.ProgramId
                                          select new ModelSeatsList
                                          {
-                                             Id=a.SeatId,
-                                             ProgramTitle=b.ProgramTitle,
-                                             TotalSeats=a.SeatsTotal,
-                                             AvailAbleSeats=a.SeatsAvailable,
-                                             ReserveSeats=a.SeatsReserve
+                                             Id = a.SeatId,
+                                             ProgramTitle = b.ProgramTitle,
+                                             TotalSeats = a.SeatsTotal,
+                                             AvailAbleSeats = a.SeatsAvailable,
+                                             ReserveSeats = a.SeatsReserve
 
                                          }).ToList();
-            
+
 
 
             return View(obj);
@@ -1115,25 +1328,50 @@ namespace GCCommerce.Controllers
             Seats obj = OurdbContext.Seats.Where(abc => abc.SeatId == SeatsID).FirstOrDefault<Seats>();
             return View(obj);
         }
-        [HttpDelete]
-        public IActionResult SeatsDelete(int SeatsID)
+
+        //public IActionResult SeatsDelete(int SeatsID)
+        //{
+        //    Seats obj = OurdbContext.Seats.Where(abc => abc.SeatId == SeatsID).FirstOrDefault<Seats>();
+        //    OurdbContext.Seats.Remove(obj);
+        //    OurdbContext.SaveChanges();
+        //    return RedirectToAction(nameof(AdministratorController.SeatsList));
+        //}
+
+        public bool DeleteSeats(int Id)
         {
-            Seats obj = OurdbContext.Seats.Where(abc => abc.SeatId == SeatsID).FirstOrDefault<Seats>();
-            OurdbContext.Seats.Remove(obj);
-            OurdbContext.SaveChanges();
-            return RedirectToAction(nameof(AdministratorController.SeatsList));
+            try
+            {
+                Seats S = OurdbContext.Seats.Find(Id);
+                if (S != null)
+                {
+                    OurdbContext.Seats.Remove(S);
+                    OurdbContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
+
+
+
         private Seats CopyMSToS(ModelSeats MS)
         {
             Seats S = new Seats
             {
-               SeatId =MS.SeatId,
-               FkProgramId=MS.FkProgramId,
-               SeatsTotal=MS.SeatsTotal,
-               SeatsAvailable=MS.SeatsAvailable,
-               SeatsReserve=MS.SeatsReserve,
-               DateCreated = MS.DateCreated,
-               DateUpdated = MS.DateUpdated,
+                SeatId = MS.SeatId,
+                FkProgramId = MS.FkProgramId,
+                SeatsTotal = MS.SeatsTotal,
+                SeatsAvailable = MS.SeatsAvailable,
+                SeatsReserve = MS.SeatsReserve,
+                DateCreated = MS.DateCreated,
+                DateUpdated = MS.DateUpdated,
             };
             return S;
         }

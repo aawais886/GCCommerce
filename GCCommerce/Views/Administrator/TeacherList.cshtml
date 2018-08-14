@@ -103,9 +103,11 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateTeacher", new { id=item.TeacherId }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "TeacherDetail", new { TeacherID = item.TeacherId }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Edit", "UpdateTeacher", new { id = item.TeacherId }, new { @class = "btn btn-success" }) 
+                    @Html.ActionLink("Details", "TeacherDetail", new { TeacherID = item.TeacherId }, new { @class = "btn btn-primary" }) 
+                   @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })*@
+                    <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.TeacherId">Delete</a>
+
                 </td>
             </tr>
         }
@@ -116,6 +118,31 @@
         $(document).ready(function () {
             $('#table').DataTable();
 
-    });
+        });
+
+        $('.dlt').click(function () {
+            var deletbutton = $(this);
+            alert(deletbutton.data("id"));
+            if (confirm("Are You Sure you want to delete")) {
+                deletbutton.text("Please wait.....");
+                $.ajax({
+                    before: function () { },
+                    url: '/Administrator/DeleteTeacher',
+                    type: 'GET',
+                    data: {
+                        id: deletbutton.data("id")
+                    },
+                    success: function (result) {
+                        alert(result);
+                        if (result == true) {
+                            deletbutton.parent().parent().fadeOut();
+                        }
+                    },
+                    error: function () { },
+                    after: function () { }
+                })
+            }
+
+        });
     </script>
 }

@@ -58,9 +58,10 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "GalleryDetail", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small btn-primary" }) |
-                    @Html.ActionLink("Delete", "GalleryDelete", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small  btn-danger" })
+                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }, new { @class = "btn btn-success" }) 
+                    @Html.ActionLink("Details", "GalleryDetail", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small btn-primary" }) 
+                    @*@Html.ActionLink("Delete", "GalleryDelete", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small  btn-danger" })*@
+                    <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.GalleryId">Delete</a>
                 </td>
             </tr>
         }
@@ -70,6 +71,31 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable();
+
+        });
+
+        $('.dlt').click(function () {
+            var deletbutton = $(this);
+            alert(deletbutton.data("id"));
+            if (confirm("Are You Sure you want to delete")) {
+                deletbutton.text("Please wait.....");
+                $.ajax({
+                    before: function () { },
+                    url: '/Administrator/DeleteGallery',
+                    type: 'GET',
+                    data: {
+                        id: deletbutton.data("id")
+                    },
+                    success: function (result) {
+                        alert(result);
+                        if (result == true) {
+                            deletbutton.parent().parent().fadeOut();
+                        }
+                    },
+                    error: function () { },
+                    after: function () { }
+                })
+            }
 
         });
     </script>

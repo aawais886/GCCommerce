@@ -45,9 +45,10 @@
                     @Html.DisplayFor(modelItem => item.AdmissionDocument)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID }, new { @class = "btn btn-success" })|
-                    @Html.ActionLink("Details", "Details", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small btn-primary" }) |
-                    @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small  btn-danger" })
+                    @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "AdmissionDetail", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small btn-primary" })
+                    @* @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small  btn-danger" })*@
+                    <a href="#" onclick="return false;" class="btn btn-danger dlt" data-id="@item.AdmissonID">Delete</a>
                 </td>
             </tr>
         }
@@ -57,7 +58,32 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable();
+        });
 
-    });
+        $('.dlt').click(function () {
+            var deletbutton = $(this);
+            alert(deletbutton.data("id"));
+
+            if (confirm("Are you sure you want to delete")) {               
+                deletbutton.text("please wait ...");
+                $.ajax({
+                    before: function () { },
+                    url: '/Administrator/DeleteAdmission',
+                    type: 'GET',
+                    data: {
+                        Id: deletbutton.data("id")
+                    },
+                    success: function (result) {
+                        alert(result);
+                        if (result == true) {
+                            deletbutton.parent().parent().fadeOut();
+                        }
+                    },
+                    error: function () { },
+                    after: function () { }
+                });
+            }
+        });
+
     </script>
 }
