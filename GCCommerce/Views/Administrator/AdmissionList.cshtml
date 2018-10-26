@@ -44,11 +44,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AdmissionDocument)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Details", "AdmissionDetail", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small btn-primary" })
-                    @* @Html.ActionLink("Delete", "AdmissionDelete", new { AdmissionID = item.AdmissonID }, new { @class = "btn btn-small  btn-danger" })*@
-                    <a href="#" onclick="return false;" class="btn btn-danger dlt" data-id="@item.AdmissonID">Delete</a>
+                <td>    
+                    @Html.ActionLink("Edit", "UpdateAdmission", new { id = item.AdmissonID }, new { @class = "glyphicon glyphicon-edit" })
+                    @Html.ActionLink("Details", "AdmissionDetail", new { AdmissionID = item.AdmissonID }, new { @class = "glyphicon glyphicon-tree-deciduous" })
+                    <a href="#" onclick="return false;" class="glyphicon glyphicon-trash dlt" data-id="@item.AdmissonID">Delete</a>
                 </td>
             </tr>
         }

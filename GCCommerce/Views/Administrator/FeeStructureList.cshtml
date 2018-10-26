@@ -37,9 +37,9 @@
         </th>
         <th hidden>
             @Html.DisplayNameFor(model => model.DateUpdated)
-        </th>*@
+        </th>
             <th></th>
-        </tr>
+        </tr>*@
     </thead>
     <tbody>
         @foreach (var item in Model)
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Year2)
             </td>
             @*<td hidden>
-            @Html.DisplayFor(modelItem => item.DateCreated)
+            @Html.DisplayFor(modelItem => item.)
         </td>
         <td hidden>
             @if (item.DateUpdated != null)
@@ -77,10 +77,9 @@
             }
         </td>*@
             <td>
-                @Html.ActionLink("Edit", "UpdateFeeStructure", new { id = item.Id }, new { @class = "btn btn-success" })
-                @Html.ActionLink("Details", "FeeStructureDetail", new { FeeStructureID = item.Id }, new { @class = "btn btn-small btn-primary" })
-                @*@Html.ActionLink("Delete", "FeeStructureDelete", new { FeeStructureID = item.Id }, new { @class = "btn btn-small  btn-danger" })*@
-                <a href="#" onclick="return false;" class="btn btn-danger dlt" data-id="@item.Id">Delete</a>
+                @Html.ActionLink("Edit", "UpdateFeeStructure", new { id = item.Id }, new { @class = "glyphicon glyphicon-edit" })
+                @Html.ActionLink("Details", "FeeStructureDetail", new { FeeStructureID = item.Id }, new { @class = "glyphicon glyphicon-edit" })
+                <a href="#" onclick="return false;" class="glyphicon glyphicon-trash g dlt" data-id="@item.Id">Delete</a>
             </td>
         </tr>
         }

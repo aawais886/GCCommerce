@@ -12,7 +12,7 @@ using GCCommerce.Data;
 using GCCommerce.Models;
 using GCCommerce.Services;
 using GCCommerce.Entities;
-
+using Microsoft.AspNetCore.Session;
 namespace GCCommerce
 {
     public class Startup
@@ -42,6 +42,13 @@ namespace GCCommerce
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+            //services.AddDistributedMemoryCache();
+            services.AddSession();
+            //services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromSeconds();
+            //    options.Cookie.HttpOnly = true;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,11 +69,13 @@ namespace GCCommerce
 
             app.UseAuthentication();
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Administrator}/{action=SeatsList}/{id?}");
+                    template: "{controller=UserLogin}/{action=NewLogin}/{id?}");
             });
         }
     }

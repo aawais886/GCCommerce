@@ -16,19 +16,21 @@ namespace GCCommerce.Entities
         public virtual DbSet<Seats> Seats { get; set; }
         public virtual DbSet<Shift> Shift { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
-        public GCCommerceContext(DbContextOptions<GCCommerceContext> abc):base(abc)
+        public GCCommerceContext(DbContextOptions<GCCommerceContext> abc) : base(abc)
         {
 
         }
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer(@"Server=DESKTOP-R51537J\AWAIS;Database=GCCommerce;Trusted_Connection=True;");
-//            }
-//        }
+
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //                optionsBuilder.UseSqlServer(@"Server=DESKTOP-R51537J\AWAIS;Database=GCCommerce;Trusted_Connection=True;");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -335,6 +337,37 @@ namespace GCCommerce.Entities
                 entity.Property(e => e.TransferDate)
                     .HasColumnName("TRANSFER_DATE")
                     .HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.DateCreated).HasColumnType("datetime");
+
+                entity.Property(e => e.DateUpdated).HasColumnType("datetime");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Gander)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Image)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
         }
     }

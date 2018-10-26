@@ -65,10 +65,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateEvent", new { id = item.EventId }, new { @class = "btn btn-success" }) 
-                    @Html.ActionLink("Details", "EventDetail", new { EventID = item.EventId }, new { @class = "btn btn-small btn-primary" }) 
-                    @*@Html.ActionLink("Delete", "EventDelete", new { EventID = item.EventId }, new { @class = "btn btn-small  btn-danger" })*@
-                    <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.EventId">Delete</a>
+                    @Html.ActionLink("Edit", "UpdateEvent", new { id = item.EventId }, new { @class = "glyphicon glyphicon-edit" }) 
+                    @Html.ActionLink("Details", "EventDetail", new { EventID = item.EventId }, new { @class = "glyphicon glyphicon-tree-deciduous" }) 
+                   <a href="#" onclick="return false" class="glyphicon glyphicon-trash  dlt" data-id="@item.EventId">Delete</a>
                 </td>
             </tr>
         }

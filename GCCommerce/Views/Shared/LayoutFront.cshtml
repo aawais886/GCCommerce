@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "LayoutFront";
+    Layout = "~/Views/Shared";
+}
+
+<h2>LayoutFront</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - gcc</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+    <header class="main__header">
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="navbar-header">
+                    <h1 class="navbar-brand"><a href="index.html">UNIVERSITY</a></h1>
+                    <a href="#" class="submenu">Menus</a>
+                </div>
+                <div class="menuBar">
+                    <ul class="menu">
+                        <li class="active"><a href="/home/index">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#">Pages</a>
+                            <ul>
+                                <li><a href="index_fixed.html">Home / Fixed</a></li>
+                                <li><a href="index_with_blog.html">Home + Blog</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                                <li><a href="shortcodes.html">Shortcodes</a></li>
+                                <li><a href="blog.html">Blog & News</a></li>
+                                <li><a href="tables.html">Tables</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="left_sidebar.html">left sidebar</a></li>
+                        <li><a href="right_sidebar.html">right sidebar</a></li>
+                        <li><a href="full_width.html">full page</a></li>
+                        <li><a href="contact.html">contact us</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div>
+    </header>
+
+    <div class="">
+        @RenderBody()
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3>About</h3>
+                        <p>
+                            We strive to deliver a level of service that exceeds the expectations of our customers. <br />
+                            <br />
+                            If you have any questions about our products or services, please do not hesitate to contact us. We have friendly, knowledgeable representatives available seven days a week to assist you.
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <h3>Tweets</h3>
+                        <p>
+                            <span>Tweet</span> <a href="#">@@You</a><br />
+                            Etiam egestas, ipsum posuere accumsan sollicitudin, nulla mauris volutpat sem, sit amet rutrum risus.
+                        </p>
+                        <p>
+                            <span>Tweet</span> <a href="#">@@You</a><br />
+                            Quisque porta tellus vitae adipiscing molestie. Mauris et lacus blandit, malesuada.
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <h3>Mailing list</h3>
+                        <p>Subscribe to our mailing list for offers, news updates and more!</p>
+                        <br />
+                        <form action="#" method="post" class="form-inline" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputEmail2">your email</label>
+                                <input type="email" class="form-control form-control-lg" id="exampleInputEmail2" placeholder="your email">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-md">subscribe</button>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <h3>Social</h3>
+                        <p>
+                            123 Business Way<br />
+                            San Francisco, CA 94108<br />
+                            USA<br />
+                            <br />
+                            Phone: (888) 123-4567<br />
+                            Fax: (887) 123-4567<br />
+                            <br />
+                        </p>
+                        <div class="social__icons"> <a href="#" class="socialicon socialicon-twitter"></a> <a href="#" class="socialicon socialicon-facebook"></a> <a href="#" class="socialicon socialicon-google"></a> <a href="#" class="socialicon socialicon-mail"></a> </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <p class="text-center copyright">© Copyright ABC Company. All Rights Reserved.</p>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

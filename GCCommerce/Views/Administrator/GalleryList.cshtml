@@ -58,10 +58,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }, new { @class = "btn btn-success" }) 
-                    @Html.ActionLink("Details", "GalleryDetail", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small btn-primary" }) 
-                    @*@Html.ActionLink("Delete", "GalleryDelete", new { GalleryID = item.GalleryId }, new { @class = "btn btn-small  btn-danger" })*@
-                    <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.GalleryId">Delete</a>
+                    @Html.ActionLink("Edit", "UpdateGallery", new { id = item.GalleryId }, new { @class = "glyphicon glyphicon-edit" }) 
+                    @Html.ActionLink("Details", "GalleryDetail", new { GalleryID = item.GalleryId }, new { @class = "glyphicon glyphicon-tree-deciduous" }) 
+                    <a href="#" onclick="return false" class="glyphicon glyphicon-trash  dlt" data-id="@item.GalleryId">Delete</a>
                 </td>
             </tr>
         }

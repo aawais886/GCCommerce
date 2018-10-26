@@ -103,10 +103,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateTeacher", new { id = item.TeacherId }, new { @class = "btn btn-success" }) 
-                    @Html.ActionLink("Details", "TeacherDetail", new { TeacherID = item.TeacherId }, new { @class = "btn btn-primary" }) 
-                   @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })*@
-                    <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.TeacherId">Delete</a>
+                    @Html.ActionLink("Edit", "UpdateTeacher", new { id = item.TeacherId }, new { @class = "glyphicon glyphicon-edit" }) 
+                    @Html.ActionLink("Details", "TeacherDetail", new { TeacherID = item.TeacherId }, new { @class = "glyphicon glyphicon-tree-deciduous" }) 
+                    <a href="#" onclick="return false" class="glyphicon glyphicon-trash dlt" data-id="@item.TeacherId">Delete</a>
 
                 </td>
             </tr>
@@ -116,8 +115,7 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('#table').DataTable();
-
+            $('#table').DataTable();           
         });
 
         $('.dlt').click(function () {

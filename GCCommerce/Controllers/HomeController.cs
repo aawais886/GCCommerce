@@ -12,7 +12,7 @@ namespace GCCommerce.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(HomeController.Contact));
         }
 
         public IActionResult About()

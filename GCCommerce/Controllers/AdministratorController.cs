@@ -193,7 +193,7 @@ namespace GCCommerce.Controllers
                     OurdbContext.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 TempData["action"] = Constants.FAILED;
             }
@@ -243,6 +243,7 @@ namespace GCCommerce.Controllers
             {
                 EventId = ME.EventId,
                 EventName = ME.EventName,
+                EventDescription=ME.EventDescription,
                 EventDate = ME.EventDate,
                 DateCreated = ME.DateCreated,
                 DateUpdated = ME.DateUpdated,
@@ -257,6 +258,7 @@ namespace GCCommerce.Controllers
             {
                 EventId = E.EventId,
                 EventName = E.EventName,
+                EventDescription=E.EventDescription,
                 EventDate = E.EventDate,
                 DateCreated = E.DateCreated,
                 DateUpdated = E.DateUpdated,
@@ -407,20 +409,20 @@ namespace GCCommerce.Controllers
             return View("AddUpdateTeacher", CopyTToMT(T));
         }
         [HttpPost]
-        public IActionResult AddUpdateTeacher(ModelTeacher MT, ICollection<IFormFile> images)
+        public IActionResult AddUpdateTeacher(ModelTeacher objMT, ICollection<IFormFile> Image)
         {
             if (!ModelState.IsValid)
             {
                 TempData["Action"] = Constants.FAILED;
-                return View(MT);
+                return View(objMT);
             }
-            string wwwrootPath = env.WebRootPath;
-            string ImageFolderPath = wwwrootPath + "/images/";
 
-            foreach (var file in images)
+            string wwwrootPath = env.WebRootPath;
+            string ImageFolderPath = wwwrootPath + "/ProjectImages/";
+
+            foreach (var file in Image)
             {
                 string Name = file.Name;
-
                 string FileName = file.FileName;
                 long FileLength = file.Length;
 
@@ -430,32 +432,32 @@ namespace GCCommerce.Controllers
                 FileNameWithoutExtension = DateTime.Now.ToString("ddMMyyyyhhmm") + r.Next(1, 1000).ToString();
                 string Extension = Path.GetExtension(FileName);
 
-                FileStream fs = new FileStream(ImageFolderPath + FileNameWithoutExtension + Extension, FileMode.CreateNew);
+                FileStream fs = new FileStream(ImageFolderPath + FileNameWithoutExtension+Extension, FileMode.CreateNew);
                 file.CopyTo(fs);
                 fs.Close();
                 fs.Dispose();
 
-                MT.Image = ImageFolderPath + FileNameWithoutExtension + Extension;
+                objMT.Image = ImageFolderPath + FileNameWithoutExtension + Extension;
             }
             try
             {
-                if (MT.TeacherId > 0)
+                if (objMT.TeacherId > 0)
                 {
-                    MT.DateUpdated = DateTime.Now;
-                    OurdbContext.Teacher.Update(CopyMTToT(MT));
+                    objMT.DateUpdated = DateTime.Now;
+                    OurdbContext.Teacher.Update(CopyMTToT(objMT));
                     OurdbContext.SaveChanges();
                 }
                 else
                 {
-                    OurdbContext.Teacher.Add(CopyMTToT(MT));
+                    OurdbContext.Teacher.Add(CopyMTToT(objMT));
                     OurdbContext.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 TempData["action"] = Constants.FAILED;
             }
-            return View();
+            return RedirectToAction(nameof(AdministratorController.TeacherList));
         }
 
         public IActionResult TeacherList()
@@ -518,7 +520,7 @@ namespace GCCommerce.Controllers
         }
         private ModelTeacher CopyTToMT(Teacher T)
         {
-            ModelTeacher MT = new ModelTeacher
+            ModelTeacher MTobj = new ModelTeacher
             {
                 TeacherId = T.TeacherId,
                 FirstName = T.FirstName,
@@ -534,7 +536,7 @@ namespace GCCommerce.Controllers
                 DateUpdated = T.DateUpdated,
 
             };
-            return MT;
+            return MTobj;
         }
         #endregion
 
@@ -589,6 +591,16 @@ namespace GCCommerce.Controllers
                 TempData["Action"] = Constants.FAILED;
             }
             return RedirectToAction(nameof(AdministratorController.ShiftList));
+        }
+        [HttpPost]
+        public JsonResult checkDuplicateShift(string Shift1)
+        {
+            bool duplicate = false;
+            if(OurdbContext.Shift.Where(abc => abc.Shift1.Contains(Shift1)).Count() > 0)
+            {
+                duplicate = true;
+            }
+            return Json(duplicate == false);
         }
         public IActionResult ShiftList()
         {
@@ -1133,6 +1145,27 @@ namespace GCCommerce.Controllers
             ViewBag.vbs = ILS;
             return View("AddUpdateFeeStructure", CopyFSToMFS(FS));
 
+        }
+
+        [HttpPost]
+        public JsonResult  CheckDuplicateFee(string Year1)
+        {
+            bool duplicateYear1 = false;
+            if(OurdbContext.FeeStructure.Where(abcd =>abcd.Year1.ToString().Contains(Year1)).Count() > 0)
+            {
+                duplicateYear1 = true;
+            }
+            return Json(duplicateYear1 == false);
+        }
+        [HttpPost]
+        public JsonResult CheckDuplicateF(string Year2)
+        {
+            bool duplicateYear2 = false;
+            if (OurdbContext.FeeStructure.Where(abcd => abcd.Year2.ToString().Contains(Year2)).Count() > 0)
+            {
+                duplicateYear2 = true;
+            }
+            return Json(duplicateYear2 == false);
         }
         [HttpPost]
         public IActionResult AddUpdateFeeStructure(ModelFeeStructure MFS)

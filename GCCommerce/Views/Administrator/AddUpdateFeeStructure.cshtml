@@ -32,7 +32,7 @@
                     <span asp-validation-for="Id" class="text-danger"></span>
                 </div>*@
             <div class="form-group">
-                <label asp-for="FkProgramId" class="control-label"></label>
+                <label asp-for="FkProgramId"  class="control-label"></label>
                 @*<input asp-for="FkProgramId" class="form-control" />*@
                 @Html.DropDownListFor(model => model.FkProgramId, new SelectList(ILP, "ProgramId", "ProgramTitle"), "---Select Program", new { @class = "form-control" })
 

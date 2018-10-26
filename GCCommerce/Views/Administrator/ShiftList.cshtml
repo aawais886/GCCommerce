@@ -52,10 +52,9 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "UpdateShift", new { id = item.ShiftId }, new { @class = "btn btn-success" }) 
-                @Html.ActionLink("Details", "ShiftDetail", new { ShiftID = item.ShiftId }, new { @class = "btn btn-small btn-primary" }) 
-               @*@Html.ActionLink("Delete", "ShiftDelete", new { ShiftID = item.ShiftId }, new { @class = "btn btn-small  btn-danger" })*@
-                <a href="#" onclick="return false" class="btn btn-danger dlt" data-id="@item.ShiftId">Delete</a>
+                @Html.ActionLink("Edit", "UpdateShift", new { id = item.ShiftId }, new { @class = "glyphicon glyphicon-edit" }) 
+                @Html.ActionLink("Details", "ShiftDetail", new { ShiftID = item.ShiftId }, new { @class = "glyphicong glyphicon-tree-deciduous" }) 
+                <a href="#" onclick="return false" class="glyphicon glyphicon-trash  dlt" data-id="@item.ShiftId">Delete</a>
 
             </td>
         </tr>
